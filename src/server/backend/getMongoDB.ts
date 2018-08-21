@@ -12,6 +12,8 @@ export async function getMongoDB(): Promise<MongoClient.Db> {
         const connectionUri: string =
             process.env.NODE_ENV === "production" ? process.env.MONGODB_REMOTE_URI! : process.env.MONGODB_LOCAL_URI!;
 
+        console.log("connectionUri", connectionUri);
+
         //Establish client and db connection
         client = await MongoClient.connect(
             connectionUri,

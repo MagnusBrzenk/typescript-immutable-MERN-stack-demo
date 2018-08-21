@@ -9,10 +9,6 @@ const router = express.Router();
 // Protected route to trigger uploading of pseudo data to mongoDB
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 router.get("/admin/loaddata", async (req: express.Request, res: express.Response) => {
-    // if (req.cookies.auth !== process.env.UPLOAD_PSEUDO_DATA_KEY) {
-    //     return res.json("You're not authorized to upload pseudodata!");
-    // }
-
     if (req.headers.authorization !== process.env.UPLOAD_PSEUDO_DATA_KEY) {
         const failureResponse: NETWORK.IMessageOnly = {
             message: "You're not authorized to upload pseudodata!",
