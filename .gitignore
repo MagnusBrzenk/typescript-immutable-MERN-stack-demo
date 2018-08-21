@@ -1,0 +1,8 @@
+notes.md
+_redundant
+node_modules
+.env
+dist
+_uploadRemotePseudoData.sh
+_uploadLocalPseudoData.sh
+_herokuPurge.sh

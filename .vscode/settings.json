@@ -1,0 +1,12 @@
+{
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "editor.formatOnSave": true,
+    "[jsonc]": {
+        "editor.formatOnSave": false
+    },
+    "tslint.configFile": "tslint.json",
+    "tslint.enable": true,
+    "react.beautify.onSave": false,
+    "prettier.tabWidth": 4,
+    "prettier.printWidth": 120
+}

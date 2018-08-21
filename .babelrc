@@ -1,0 +1,35 @@
+{
+    "presets": ["env", "react"],
+    "plugins": [
+        [
+            "styled-jsx/babel",
+            {
+                "sourceMaps": false,
+                "optimizeForSpeed": false
+            }
+        ],
+        "syntax-dynamic-import",
+        "transform-class-properties",
+        [
+            "transform-runtime",
+            {
+                "helpers": true,
+                "polyfill": false,
+                "regenerator": true,
+                "moduleName": "babel-runtime"
+            }
+        ]
+    ],
+    "env": {
+        "development": {
+            "plugins": [
+                [
+                    "styled-jsx/babel",
+                    {
+                        "sourceMaps": true
+                    }
+                ]
+            ]
+        }
+    }
+}

@@ -1,0 +1,191 @@
+/*----------------------------------------------------------*\
+                        General SetUp
+\*----------------------------------------------------------*/
+
+@import url("https://fonts.googleapis.com/css?family=Dosis:400,bold");
+@import url("https://fonts.googleapis.com/css?family=Poiret+One");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700|Taviraj:300,400");
+html,
+body,
+#root {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    /* font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif; */
+    font-family: "Dosis", sans-serif;
+}
+
+/*---------------------------------------------------------------------------------*\
+
+                            VERTICAL CENTERING
+
+    Vertical centering of arbitrary content is tricky/fiddly in CSS
+    The following classes are used to conveniently center arbitrary
+    content within an outermost-div as exemplified here:
+
+    <div class="outermost-div">
+        <div class="aux-vertical-center">
+            <div class="vertical-center">
+                <!-- This content is vertically centered within outermost-div -->
+            </div>
+        </div>
+    </div>
+
+\*----------------------------------------------------------------------------------*/
+
+.aux-vertical-center {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.vertical-center {
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    position: absolute;
+    top: 50%;
+}
+
+.horizontal-center {
+    -ms-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    position: absolute;
+    left: 50%;
+}
+
+.vertical-and-horizontal-center {
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+/*---------------------------------------------*\
+        Test case used in Test component
+\*---------------------------------------------*/
+
+.global-css-test {
+    background-color: purple;
+}
+
+/*-----------------------------------------------------------------*\
+                    GRID SYSTEM SETUP
+    12-column Grid Setup following approach given here:
+    https://www.sitepoint.com/understanding-css-grid-systems/
+    See Test component for example implementation
+\*-----------------------------------------------------------------*/
+
+.row,
+.column,
+.col {
+    box-sizing: border-box;
+}
+
+.row:before,
+.row:after {
+    content: " ";
+    display: table;
+}
+
+.row:after {
+    clear: both;
+}
+
+.column,
+.col {
+    position: relative;
+    float: left;
+    display: block;
+}
+
+.column + .column,
+.col + .col {
+    margin-left: 1.6%;
+}
+
+.column-1,
+.col-1 {
+    width: 6.86666666667%;
+}
+
+.column-2,
+.col-2 {
+    width: 15.3333333333%;
+}
+
+.column-3,
+.col-3 {
+    width: 23.8%;
+}
+
+.column-4,
+.col-4 {
+    width: 32.2666666667%;
+}
+
+.column-5,
+.col-5 {
+    width: 40.7333333333%;
+}
+
+.column-6,
+.col-6 {
+    width: 49.2%;
+}
+
+.column-7,
+.col-7 {
+    width: 57.6666666667%;
+}
+
+.column-8,
+.col-8 {
+    width: 66.1333333333%;
+}
+
+.column-9,
+.col-9 {
+    width: 74.6%;
+}
+
+.column-10,
+.col-10 {
+    width: 83.0666666667%;
+}
+
+.column-11,
+.col-11 {
+    width: 91.5333333333%;
+}
+
+.column-12,
+.col-12 {
+    width: 100%;
+    margin-left: 0;
+}
+
+@media only screen and (max-width: 500px) {
+    .column-1,
+    .column-2,
+    .column-3,
+    .column-4,
+    .column-5,
+    .column-6,
+    .column-7,
+    .column-8,
+    .column-9,
+    .column-10,
+    .column-11,
+    .column-12 {
+        float: none;
+        width: auto;
+    }
+    .column + .column {
+        margin-left: 0;
+    }
+}
