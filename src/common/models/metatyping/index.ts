@@ -80,7 +80,7 @@ export interface ImMethodsInterface<T> extends DeleteMethods<T>, GetMethods<T>, 
  * @param defaultObject -- the POJO to be deeply converted to immutable object
  */
 export function getImmutableGenerator<T>(defaultPOJO: T): (params?: Partial<T>) => getImType<T> {
-    return function (params?: Partial<T>): getImType<T> {
+    return function(params?: Partial<T>): getImType<T> {
         //
 
         /**
@@ -138,6 +138,7 @@ export type getImType<T> =
     // T extends TPrimitives // //
     // ? T
     // :
-    ImMethodsInterface<T>
-    //
-    & (T extends any[] ? L : M) & Exclude<T, "map" | 'concat'>; //
+    ImMethodsInterface<T> &
+        //
+        (T extends any[] ? L : M) &
+        Exclude<T, "map" | "concat">; //
