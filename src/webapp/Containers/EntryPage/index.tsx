@@ -124,7 +124,15 @@ export class EntryPageComponent extends React.Component<IProps, IState> {
                                 receive one, then contact darg@jhu.edu
                             </p>
 
-                            <p>The code for this site can be found here: ___________</p>
+                            <p>
+                                The code for this site can be found{" "}
+                                <a
+                                    href="https://github.com/MagnusBrzenk/typescript-immutable-MERN-stack-demo"
+                                    target="_blank"
+                                >
+                                    here
+                                </a>
+                            </p>
                             <p>
                                 The site's specs are super-up-to-date as of August 2018. For details, see the various
                                 readme's within the repo. Some key features include:
@@ -164,7 +172,12 @@ export class EntryPageComponent extends React.Component<IProps, IState> {
                                 </p>
                                 <p>
                                     As a demo site, it's not designed/intended for high security or heavy traffic, so
-                                    please be sensible about how it's shared, etc.
+                                    please be sensible about how it's shared, etc. Attempts to take down this site with
+                                    DOS attacks shall be met with <b>severe</b> passive aggression (
+                                    <a href="https://www.smbc-comics.com/comic/2009-10-24" target="_blank">
+                                        it's not worth it!
+                                    </a>
+                                    )
                                 </p>
                                 <p>
                                     LAW-
@@ -177,13 +190,7 @@ export class EntryPageComponent extends React.Component<IProps, IState> {
                                 <p>
                                     SUUM CUIQUE DISCLAIMER. The usual data-centric-websites disclaimers apply: any usage
                                     of this site, data you submit, etc. is done so at your own risk and all parties
-                                    involved may keep their eternal souls.
-                                </p>
-                                <p>
-                                    WARNING! Attempts to take down this site with e.g. globally coordinated DOS attacks
-                                    shall be met with <b> severe passive aggression</b> (
-                                    <a href="https://www.smbc-comics.com/comic/2009-10-24">it's not worth it!</a>
-                                    ).
+                                    involved may keep their souls.
                                 </p>
                             </div>
                         </div>
