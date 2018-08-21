@@ -40,7 +40,8 @@
         "path": "^0.12.7",
         "s3-upload-stream": "^1.0.7",
         "serve-favicon": "^2.5.0",
-        "stream": "^0.0.2"
+        "stream": "^0.0.2",
+        "uuid": "^3.3.2"
     },
     "devDependencies": {
         "@fortawesome/fontawesome": "^1.1.8",
@@ -130,7 +131,6 @@
         "typescript": "^3.0.1",
         "url-loader": "^1.1.0",
         "utility-types": "^2.0.0",
-        "uuid": "^3.3.2",
         "webpack": "^4.16.5",
         "webpack-bundle-analyzer": "^2.13.1",
         "webpack-cli": "^3.0.8",
