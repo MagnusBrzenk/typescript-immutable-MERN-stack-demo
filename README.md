@@ -8,7 +8,7 @@
     -   Local storage: enable authorized user to remain authorized for ~24 hours
     -   user-specific actions
 -   Search: at the moment word search is only local -- needs to query actual DB
--   Testing: add mocha and karma frameworks with some demo tests
+-   Testing: flesh out the frontend tests a bit, and add at least one demo unit test and one demo integration test to the backend
 -   Clean up metatyping and try to implement 'clothed conditionals'
 -   Server rate limiting with e.g. express-brute
 -   Improve partitioning of webpacking of ts/tsx files for back- and frontends (a compiler error on the backend is not to affect webpakcing of fronted and vice-versa!)
