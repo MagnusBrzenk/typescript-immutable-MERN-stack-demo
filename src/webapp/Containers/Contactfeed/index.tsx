@@ -58,8 +58,11 @@ class ContactfeedComponent extends React.Component<IProps, IState> {
     }
 
     componentDidUpdate(prevProps: IProps) {
-        if (prevProps.allContactItems !== this.props.allContactItems) {
-            this.setState({ allContactItems: this.props.allContactItems });
+        if (prevProps !== this.props) {
+            this.setState({
+                allContactItems: this.props.allContactItems,
+                heightPxls: this.props.heightPxls
+            });
         }
     }
 
@@ -98,10 +101,7 @@ class ContactfeedComponent extends React.Component<IProps, IState> {
                         width: 100%;
                     }
                 `}</style>
-                <div //
-                    className="contact-item-wrapper"
-                    id="contact-item-wrapper-id"
-                >
+                <div className="contact-item-wrapper">
                     {!!displayedContactItems &&
                         displayedContactItems.map((el: CONTACT.ImType, ind: number | undefined, arr: any) => (
                             <span key={ind}>
