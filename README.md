@@ -15,16 +15,17 @@
 
 ### Intro
 
-TODO -- here's the outline
+TODO -- here's the outline of the intro to be written:
 
 -   Web dev has roughly 2 parts: understanding your architecture, and building the details of your app
 -   This project is all about investing heavily in the first to serve the second
 -   DRY is supremely important to this approach
--   Full-stack architectures are few and too few in between: ok, we have a todo app, but MERN/MEAN 'should' be all about capitalizing on common structures writeen in .ts/tsx between both frontend and backend; i.e. the community needs more full-stack demos!
+-   Full-stack architectures are too few far in between: ok, we have lots of todo apps, but MERN/MEAN need to capitalize on ability to share js structures between both frontend and backend; i.e. the community needs more full-stack demos!
 -   Arguments for/against this immutable approach
     -   Standard arguments for/against immutable
     -   `immutable` isn't net worth it but, as an excersize, let's see how we can best make it work with typescript
-    -   Disatisfaction with records
+    -   Dissatisfaction with records
+    -   etc.
 
 ### Local Dev Setup
 
@@ -80,7 +81,7 @@ A lot fo thought has gone into building this architecture so that you can share 
 
 TODO
 
-### Details
+### Tech Details
 
 #### Transpiling ts/tsx -> js
 
