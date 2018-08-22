@@ -1,6 +1,7 @@
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
+
 import * as React from "react";
 import { connect } from "react-redux";
 import { ROOTSTATE, CONTACT, EXPANDEDCONTACT, NETWORK, PHONENUMBER, SIMPLEAUTH } from "__MODELS";
@@ -16,6 +17,7 @@ import { Walking } from "__COMPONENTS/@FortawesomeWrappers/Walking";
 import { Globe } from "__COMPONENTS/@FortawesomeWrappers/Globe";
 import { Trash } from "__COMPONENTS/@FortawesomeWrappers/Trash";
 import { PlusMinus } from "__COMPONENTS/@FortawesomeWrappers/PlusMinus";
+import { EditPencil } from "__COMPONENTS/@FortawesomeWrappers/EditPencil";
 import PREZ from "__UTILS/frontendPresentation";
 
 ////////////////////////////////////////////////////////////////////
@@ -470,17 +472,31 @@ class ExpandedContactComponent extends React.Component<IProps, IState> {
                             className="absolutely-positioned-over-image-edit-button"
                             onClick={this.handleClickOnEditButton}
                         >
-                            <LockUnlock
-                                bLocked={!!this.state.bEditingLocked}
-                                size="2x"
-                                color={PREZ.primaryColorDark}
-                                style={{
-                                    position: "absolute",
-                                    top: "50%",
-                                    left: "50%",
-                                    transform: "translate(-50%,-50%)"
-                                }}
-                            />
+                            {!!this.state.bEditingLocked ? (
+                                <EditPencil
+                                    size="2x"
+                                    color={PREZ.primaryColorDark}
+                                    style={{
+                                        position: "absolute",
+                                        top: "50%",
+                                        left: "50%",
+                                        transform: "translate(-50%,-50%)"
+                                    }}
+                                />
+                            ) : (
+                                <LockUnlock
+                                    bLocked={false}
+                                    // bLocked={!!this.state.bEditingLocked}
+                                    size="2x"
+                                    color={PREZ.primaryColorDark}
+                                    style={{
+                                        position: "absolute",
+                                        top: "50%",
+                                        left: "50%",
+                                        transform: "translate(-50%,-50%)"
+                                    }}
+                                />
+                            )}
                         </div>
                     </div>
                     <div className="contact-non-image-data">
