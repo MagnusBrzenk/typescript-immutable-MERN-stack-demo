@@ -222,7 +222,6 @@ class FilterBarComponent extends React.Component<IProps, IState> {
                             <div
                                 className="new-contact-wrapper"
                                 onClick={() => {
-                                    console.log("?!?!?! Working??");
                                     this.props.cbSetExpandedContact(
                                         CONTACT.genIm().set("_id", provisionalNewContactId)
                                     );

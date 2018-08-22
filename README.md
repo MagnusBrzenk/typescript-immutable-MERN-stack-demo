@@ -5,8 +5,8 @@
 ### Project TODOs
 
 -   Security: Implement much better authorization with e.g. passport, web tokens, etc.
-    -- Local storage: enable authorized user to remain authorized for ~24 hours
-    -- user-specific actions
+    -   Local storage: enable authorized user to remain authorized for ~24 hours
+    -   user-specific actions
 -   Search: at the moment word search is only local -- needs to query actual DB
 -   Testing: add mocha and karma frameworks with some demo tests
 -   Clean up metatyping and try to implement 'clothed conditionals'
@@ -22,9 +22,9 @@ TODO -- here's the outline
 -   DRY is supremely important to this approach
 -   Full-stack architectures are few and too few in between: ok, we have a todo app, but MERN/MEAN 'should' be all about capitalizing on common structures writeen in .ts/tsx between both frontend and backend; i.e. the community needs more full-stack demos!
 -   Arguments for/against this immutable approach
-    -- Standard arguments for/against immutable
-    -- immutable isn't net worth it but, as an excersize, let's see how we can best make it work with typescript
-    -- Disatisfaction with records
+    -   Standard arguments for/against immutable
+    -   `immutable` isn't net worth it but, as an excersize, let's see how we can best make it work with typescript
+    -   Disatisfaction with records
 
 ### Local Setup
 
