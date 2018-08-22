@@ -26,7 +26,7 @@ TODO -- here's the outline
     -   `immutable` isn't net worth it but, as an excersize, let's see how we can best make it work with typescript
     -   Disatisfaction with records
 
-### Local Setup
+### Local Dev Setup
 
 These are instructions for setting up a local operating version of this app.
 
@@ -55,6 +55,16 @@ sh _devWebapp.sh
 ```
 
 If all goes well, the app will function from `http://localhost:3000/`. This repo uses webpack to bundle both the front and backend into low-level JS with source maps in the `dist` dir. This dir can be cleaned out on a regular basis (as it tends to accumulate a lot of junk, especially in dev mode).
+
+### Local Production Setup
+
+To simulate a deployed production version locally, this repo provides an intermediate `localprod` run. To use this, run
+
+```bash
+sh _buildLocal.sh
+```
+
+This will generate bundles for the front and backends in `dist`. This will also launch the webpack-bundle analyzer after your frontend bundle is complete, allowing you to inspect its contents. Once you exit from service, you can then run `node dist/server.js` and inspect the bundled interface being served by the express server just built at `http://localhost:5000/`.
 
 #### VSCode
 

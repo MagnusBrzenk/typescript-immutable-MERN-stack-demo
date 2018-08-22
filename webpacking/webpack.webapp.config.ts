@@ -19,24 +19,16 @@ const bIsProduction: boolean = process.env.NODE_ENV === "production" || process.
 const bRemoveComments: boolean = true;
 const tsLoader: string = true ? "ts-loader" : "awesome-typescript-loader";
 
-console.log("########################################################");
-console.log("Running webpack.webapp.config from: ", __dirname);
-console.log(path.resolve("src", "webapp", "AppEntry", "index.tsx"));
-console.log("bIsProduction", !!bIsProduction);
-console.log("########################################################");
+///////////////////////////////////////////////////////////
+// Webpack directives for frontend build and dev
+///////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////
 const clientWebpackConfig: webpack.Configuration = {
-    ////////////////////////////////////////////////
-
-    // entry: [path.resolve("src", "server", "index.ts")],
     entry: !!bIsProduction
-        ? // ? [path.resolve(__dirname, "..", "src", "webapp", "AppEntry", "index.tsx")]
-          [path.resolve("src", "webapp", "AppEntry", "index.tsx")]
+        ? [path.resolve("src", "webapp", "AppEntry", "index.tsx")]
         : [
               "webpack-dev-server/client?http://localhost:3000",
               "webpack/hot/only-dev-server",
-              //   path.resolve(__dirname, "..", "src", "webapp", "AppEntry", "index.tsx")
               path.resolve("src", "webapp", "AppEntry", "index.tsx")
           ],
 
@@ -51,7 +43,7 @@ const clientWebpackConfig: webpack.Configuration = {
 
     devServer: {
         hot: true,
-        contentBase: [path.join(__dirname, "..", "resources", "images"), path.join(__dirname, "dist")],
+        contentBase: [path.resolve("resources", "images"), path.resolve("dist")],
         publicPath: "http://localhost:3000/",
         historyApiFallback: {
             disableDotRule: true
@@ -117,10 +109,7 @@ const clientWebpackConfig: webpack.Configuration = {
                               }
                           }
                       ],
-                exclude: [
-                    /node_modules/
-                    // , path.join("..", "node_modules"), path.join("node_modules")
-                ] //[path.join("..", "node_modules")]
+                exclude: [/node_modules/]
             },
 
             ////////////////////////////////////
@@ -148,8 +137,6 @@ const clientWebpackConfig: webpack.Configuration = {
             //Global LESS
             {
                 test: /global\.less$/,
-                // use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-                // fallback: 'style-loader',
                 use: [
                     "css-hot-loader",
                     MiniCssExtractPlugin.loader,
@@ -168,8 +155,6 @@ const clientWebpackConfig: webpack.Configuration = {
             //Global SASS
             {
                 test: /global\.scss$/,
-                // use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-                // fallback: ['style-loader', 'css-loader', 'sass-loader'],
                 use: [
                     "css-hot-loader",
                     MiniCssExtractPlugin.loader,
@@ -256,8 +241,7 @@ const clientWebpackConfig: webpack.Configuration = {
 
         // Plugin to inject react <script> into html file to be copied over to `output.path`
         new HtmlWebpackPlugin({
-            // template: path.join(__dirname, "..", "resources", "index.html"),
-            template: path.join("resources", "index.html"),
+            template: path.resolve("resources", "index.html"),
             title: "Caching"
         }),
 
@@ -311,8 +295,8 @@ const clientWebpackConfig: webpack.Configuration = {
                     keep_fnames: false,
                     safari10: false,
                     compress: !!bIsProduction
-                } as any
-            })
+                }
+            } as any)
         ]
     }
 };

@@ -9,10 +9,10 @@ import path from "path";
 
 const bIsProduction: boolean = process.env.NODE_ENV === "production" || process.env.NODE_ENV === "localprod";
 
-/**
- * Main configuration object. Paths are set up on the assumption that this
- * module is exported by running webpack from the project's root directory
- */
+///////////////////////////////////////////////////////////
+// Webpack directives for backend build
+///////////////////////////////////////////////////////////
+
 const serverWebpackConfig: webpack.Configuration = {
     entry: [path.resolve("src", "server", "index.ts")],
 
