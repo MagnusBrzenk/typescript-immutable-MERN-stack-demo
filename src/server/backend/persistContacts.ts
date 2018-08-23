@@ -1,4 +1,4 @@
-import { getMongoDB } from "__BACKEND/getMongoDB";
+import { getMongoDB } from "./getMongoDB";
 import { CONTACT } from "__MODELS";
 import { provisionalNewContactId } from "__CONSTANTS";
 import { ObjectId, BulkWriteOpResultObject } from "mongodb";
