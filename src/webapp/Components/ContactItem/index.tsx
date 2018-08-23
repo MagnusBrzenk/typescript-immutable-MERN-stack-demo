@@ -1,13 +1,11 @@
 import * as React from "react";
-import PREZ from "__UTILS/frontendPresentation";
-import { CONTACT, EXPANDEDCONTACT, PHONENUMBER } from "__MODELS";
+import { CONTACT } from "__MODELS";
 import { User } from "__COMPONENTS/@FortawesomeWrappers/User";
 import { Phone } from "__COMPONENTS/@FortawesomeWrappers/Phone";
 import { Envelope } from "__COMPONENTS/@FortawesomeWrappers/Envelope";
 import { AngleArrow } from "../@FortawesomeWrappers/AngleArrow";
-// import { AngleArrow } from "__COMPONENTS/@FortawesomeWrappers/AngleArrow";
-// import { EditPencil } from "__COMPONENTS/@FortawesomeWrappers/EditPencil";
 import localCssStyles from "./styles.css";
+import PREZ from "__UTILS/frontendPresentation";
 
 interface IProps {
     contactData: CONTACT.ImType;
@@ -19,42 +17,20 @@ interface IState {
     bActiveBoxChecked: boolean;
     selectedPhoneNumberIndex: number;
     fontSizePercent: string;
-    varyingMargin: number;
     contactData: CONTACT.ImType;
 }
 
-export class ContactItem extends React.Component<IProps, IState> {
+export class ContactItem extends React.PureComponent<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
             bActiveBoxChecked: true,
             selectedPhoneNumberIndex: 0,
             fontSizePercent: "110%",
-            varyingMargin: 0,
             contactData: this.props.contactData
         };
-        this.handleWindowResize = this.handleWindowResize.bind(this);
         this.adjustPhoneNumberIndex = this.adjustPhoneNumberIndex.bind(this);
         this.setState = this.setState.bind(this);
-    }
-
-    componentDidMount() {
-        window.addEventListener("resize", this.handleWindowResize);
-        this.handleWindowResize();
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.handleWindowResize);
-    }
-
-    componentDidUpdate(prevProps: IProps) {
-        if (prevProps !== this.props) {
-            this.setState({ contactData: this.props.contactData });
-        }
-    }
-
-    handleWindowResize() {
-        this.setState({ fontSizePercent: PREZ.getDynamicFontSizePrcnt("xlarge") + "%" });
     }
 
     //Add +/- 1 to selectedIndex without going outside array bounds
@@ -72,7 +48,7 @@ export class ContactItem extends React.Component<IProps, IState> {
         //Layout params:
         const editIconWrapperWidth: number = 0; // 50;
         //Convenience vars:
-        const contact: CONTACT.ImType = this.state.contactData;
+        const contact: CONTACT.ImType = this.props.contactData;
         const bActive: boolean = !!contact.get("bActive");
         const phoneNums = contact.get("phoneNumbers");
         const phoneIndex: number = this.state.selectedPhoneNumberIndex;
@@ -87,9 +63,7 @@ export class ContactItem extends React.Component<IProps, IState> {
         const bSmallLayout: boolean = window.innerWidth < PREZ.lowerScreenSize;
 
         return (
-            <div //
-                className={`contact-item`}
-            >
+            <div className="contact-item">
                 <style jsx>{`
                     @keyframes lightenIn {
                         0% {
@@ -101,7 +75,7 @@ export class ContactItem extends React.Component<IProps, IState> {
                     }
                     .contact-item {
                         cursor: pointer;
-                        animation: lightenIn 0.5s linear;
+                        animation: lightenIn 0.5s ease-in-out;
                         width: 100%;
                         margin: auto auto;
                         padding: 5px;

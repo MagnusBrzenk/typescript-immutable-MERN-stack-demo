@@ -48,7 +48,7 @@ namespace FrontendPresentation {
         if (size === "huge") baseSize = 50;
 
         const minFontSizePercent: number = 0 + baseSize;
-        const maxFontSizePercent: number = 100 + baseSize;
+        const maxFontSizePercent: number = 80 + baseSize;
         let fontSizePercent: number = maxFontSizePercent;
         if (window.innerWidth > lowerScreenSize) {
             fontSizePercent =

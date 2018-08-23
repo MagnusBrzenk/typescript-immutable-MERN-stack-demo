@@ -13,6 +13,8 @@ import {
     selectDisplayItemsFilter,
     selectWordForSearching
 } from "__REDUX/selectors";
+import PREZ from "__UTILS/frontendPresentation";
+
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
@@ -29,8 +31,8 @@ type IProps = IReduxStateToProps & IReduxCallbacks & IParentProps;
 interface IState {
     width: string;
     heightPxls: number;
-    //
     allContactItems: CONTACT.ImTypes;
+    contactItemFontSizePercent: string;
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -44,9 +46,11 @@ class ContactfeedComponent extends React.Component<IProps, IState> {
         this.state = {
             width: this.props.width ? this.props.width : "100%",
             heightPxls: this.props.heightPxls,
-            allContactItems: this.props.allContactItems
+            allContactItems: this.props.allContactItems,
+            contactItemFontSizePercent: PREZ.getDynamicFontSizePrcnt("xlarge") + "%"
         };
         this.infiniteScrollHandler = this.infiniteScrollHandler.bind(this);
+        this.handleWindowResize = this.handleWindowResize.bind(this);
     }
 
     componentDidMount() {
@@ -55,6 +59,12 @@ class ContactfeedComponent extends React.Component<IProps, IState> {
         if (!!scrollDiv) scrollDiv.addEventListener("scroll", this.infiniteScrollHandler);
         //Trigger action that then triggers epic that fetches contacts for feed
         this.props.cbFetchMoreContacts();
+        //Feed width resizing, etc.
+        window.addEventListener("resize", this.handleWindowResize);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.handleWindowResize);
     }
 
     componentDidUpdate(prevProps: IProps) {
@@ -64,6 +74,10 @@ class ContactfeedComponent extends React.Component<IProps, IState> {
                 heightPxls: this.props.heightPxls
             });
         }
+    }
+
+    handleWindowResize() {
+        this.setState({ contactItemFontSizePercent: PREZ.getDynamicFontSizePrcnt("xlarge") + "%" });
     }
 
     infiniteScrollHandler() {
@@ -99,6 +113,7 @@ class ContactfeedComponent extends React.Component<IProps, IState> {
                     .contact-item-wrapper {
                         height: 100%;
                         width: 100%;
+                        font-size: ${this.state.contactItemFontSizePercent};
                     }
                 `}</style>
                 <div className="contact-item-wrapper">
