@@ -6,7 +6,9 @@ import { AppActions } from "__REDUX/actions";
 import { HomePage } from "__CONTAINERS/HomePage";
 import PREZ from "__UTILS/frontendPresentation";
 
-interface IParentProps {}
+interface IParentProps {
+    //
+}
 
 interface IState {
     formMessage: string;
@@ -134,8 +136,8 @@ export class EntryPageComponent extends React.Component<IProps, IState> {
                                 </a>
                             </p>
                             <p>
-                                The site's specs are super-up-to-date as of August 2018. For details, see the various
-                                readme's within the repo. Some key features include:
+                                The site's specs are up-to-date as of August 2018. For details, see the various readme's
+                                within the repo. Some key features include:
                             </p>
                             <div
                                 style={{
@@ -157,40 +159,31 @@ export class EntryPageComponent extends React.Component<IProps, IState> {
                                 CSS, Less and Sass/Scss are enabled globally, through local css-modules, and via my
                                 overall preferred approach using styled-jsx (CSS only).
                             </p>
-                            <p>
+                            {/* <p>
                                 Note: there are lots of ways this site could be improved, but since it's main purpose
                                 was to develop/demonstrate boilerplate-design patterns in the world of
                                 typescript-react-redux-immutable, I've decided not to obsess over it (any more than is
                                 seen here).
-                            </p>
+                            </p> */}
                             <div className="terms-of-use">
                                 <h3>TERMS OF USE</h3>
-                                <h4>As of August 21st 2018</h4>
+                                <h4>As of August 23st 2018</h4>
                                 <p>
                                     Feel free to edit/add/delete contacts to the site but be aware that the DB will be
-                                    reset automatically <b>at least</b> every 24 hours!
+                                    reset periodically.
                                 </p>
                                 <p>
                                     As a demo site, it's not designed/intended for high security or heavy traffic, so
-                                    please be sensible about how it's shared, etc. Attempts to take down this site with
-                                    DOS attacks shall be met with <b>severe</b> passive aggression (
-                                    <a href="https://www.smbc-comics.com/comic/2009-10-24" target="_blank">
-                                        it's not worth it!
-                                    </a>
-                                    )
+                                    please be sensible about how it's shared, etc.
                                 </p>
                                 <p>
-                                    LAW-
-                                    {"&"}
-                                    -ORDER DISCLAIMER. The textual data on this site is entirely fictional and has been
-                                    randomly associated with images that were themselves randomly scraped from public
-                                    facebook data.
+                                    The textual data on this site is entirely fictional and has been randomly associated
+                                    with images that were themselves randomly scraped from public facebook data.
                                 </p>
 
                                 <p>
-                                    SUUM CUIQUE DISCLAIMER. The usual data-centric-websites disclaimers apply: any usage
-                                    of this site, data you submit, etc. is done so at your own risk and all parties
-                                    involved may keep their souls.
+                                    The usual data-centric-websites disclaimers apply: any usage of this site, data you
+                                    submit, etc. is done so at your own risk, etc.
                                 </p>
                             </div>
                         </div>

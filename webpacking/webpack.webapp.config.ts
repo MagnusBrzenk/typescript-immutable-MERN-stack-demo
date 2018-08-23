@@ -19,9 +19,9 @@ const bIsProduction: boolean = process.env.NODE_ENV === "production" || process.
 const bRemoveComments: boolean = true;
 const tsLoader: string = true ? "ts-loader" : "awesome-typescript-loader";
 
-///////////////////////////////////////////////////////////
-// Webpack directives for frontend build and dev
-///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////
+// Webpack directives for frontend build and dev //
+///////////////////////////////////////////////////
 
 const clientWebpackConfig: webpack.Configuration = {
     entry: !!bIsProduction
