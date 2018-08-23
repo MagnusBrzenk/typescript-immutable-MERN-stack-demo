@@ -15,6 +15,6 @@ export class NoMatchPage extends React.Component<IProps, IState> {
     }
 
     render() {
-        return <div>No Match! </div>;
+        return <div>Route Not Found! </div>;
     }
 }
