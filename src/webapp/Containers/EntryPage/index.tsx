@@ -6,7 +6,9 @@ import { AppActions } from "__REDUX/actions";
 import { HomePage } from "__CONTAINERS/HomePage";
 import PREZ from "__UTILS/frontendPresentation";
 
-interface IParentProps {}
+interface IParentProps {
+    //
+}
 
 interface IState {
     formMessage: string;
