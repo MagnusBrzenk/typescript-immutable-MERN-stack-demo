@@ -25,6 +25,7 @@
         "no-bitwise":false,
         "max-classes-per-file":false,
         "no-empty-interface":false,
-        "unified-signatures":false
+        "unified-signatures":false,
+        "no-reference":false
     }
 }

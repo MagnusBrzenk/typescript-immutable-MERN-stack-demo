@@ -25,7 +25,7 @@ export namespace PHONENUMBER {
 
     export const Demo: Interface = {
         countryCode: COUNTRYCODE.Demo,
-        dialNumber: "000 111 222",
+        dialNumber: "000 111 2222",
         phoneType: "mobile"
     };
 

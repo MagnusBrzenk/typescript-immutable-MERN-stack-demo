@@ -1,15 +1,14 @@
 import * as dotenv from "dotenv";
 dotenv.config({ path: ".env" });
 
+if (!!process.env.DISABLE_DEBUG) delete process.env.DEBUG;
 import { __debug } from "__FUNCTIONS/__debug";
-const debug = __debug("EXPRESS");
+const debug = __debug("ENV-CHECKER");
 
 /**
  * Load and confirm existence of backend environment variables
  */
-export default function loadEnvVars() {
-    //
-
+export default function loadEnvVars(disableDebug = false) {
     if (!process.env.UPLOAD_PSEUDO_DATA_KEY) {
         debug("UPLOAD_PSEUDO_DATA_KEY NOT DEFINED!!!");
         process.exit(0);

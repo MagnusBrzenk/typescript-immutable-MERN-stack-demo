@@ -1,3 +1,4 @@
+if (!!process.env.DISABLE_DEBUG) delete process.env.DEBUG;
 import debug from "debug";
 import { debugPrefixString } from "__CONSTANTS";
 
@@ -12,5 +13,6 @@ try {
  * @param debugPrefixer
  */
 export function __debug(debugCustomPrefixer: string): debug.IDebugger {
+    if (!!process.env.DISABLE_DEBUG) delete process.env.DEBUG;
     return debug(debugPrefixString + debugCustomPrefixer);
 }

@@ -5,21 +5,21 @@ let db: MongoClient.Db | undefined;
 /**
  * async get the db connection
  */
-export async function getMongoDB(): Promise<MongoClient.Db> {
+export async function getMongoDB(bVerbose: boolean = false): Promise<MongoClient.Db> {
     if (!!client && client.isConnected() && !!db) return db;
     if (!client) {
         //Determine connection
         const connectionUri: string =
             process.env.NODE_ENV === "production" ? process.env.MONGODB_REMOTE_URI! : process.env.MONGODB_LOCAL_URI!;
 
-        console.log("connectionUri", connectionUri);
+        if (!!bVerbose) console.log("connectionUri", connectionUri, process.env.NODE_ENV);
 
         //Establish client and db connection
         client = await MongoClient.connect(
             connectionUri,
             { useNewUrlParser: true }
         );
-        db = client.db("mymerndb");
+        db = client.db(process.env.MONGODB_NAME || "merindb");
 
         //Add listeners to cleanup connection if sth crashes
         const cleanup = () => {
@@ -37,11 +37,12 @@ export async function getMongoDB(): Promise<MongoClient.Db> {
             db.collection("contacts").createIndex({ lastName: 1 }, { collation: { locale: "en", strength: 2 } })
         ]);
 
-        //
-        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        console.log("MONGODB CONNECTION ESTABLISHED");
-        console.log("Mongo Indexes Status: \n" + JSON.stringify(mongoRes));
-        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        if (bVerbose) {
+            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            console.log("MONGODB CONNECTION ESTABLISHED");
+            console.log("Mongo Indexes Status: \n" + JSON.stringify(mongoRes));
+            console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        }
     }
     return db!;
 }

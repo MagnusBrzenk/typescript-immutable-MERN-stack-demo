@@ -13,4 +13,3 @@ export function validateCountryCode(input: string): boolean {
     const bCorrectPhoneFormat: boolean = re.test(String(input).toLowerCase());
     return bCorrectPhoneFormat;
 }
-
