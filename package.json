@@ -3,10 +3,6 @@
     "version": "1.0.0",
     "description": "Boilerplate for Tyepscript-Mongo-Express-React-Immutable-Node",
     "main": "index.js",
-    "engines": {
-        "node": "8.11.1",
-        "yarn": "1.9.2"
-    },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "sh _devServer & sh _devWebapp",
