@@ -4,6 +4,6 @@
 
 mocha \
     -r babel-core/register \
-    -r ./test/helpers.js \
-    -r ./test/dom.js \
+    -r ./testing/helpers.js \
+    -r ./testing/dom.js \
     -r ignore-styles './src/**/*.spec.js'

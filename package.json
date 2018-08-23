@@ -5,10 +5,9 @@
     "main": "index.js",
     "scripts": {
         "start": "sh _devServer & sh _devWebapp",
-        "build": "",
-        "heroku-postbuild": "sh _buildRemote.sh",
-        "test:unit": "mocha --require babel-core/register --require ./test/helpers.js --require ./test/dom.js --require ignore-styles './src/**/*.spec.js'",
-        "test:unit:watch": "npm run test:unit -- --watch"
+        "build": "sh _buildRemote.sh",
+        "test-frontend": "sh _testFrontend.sh",
+        "test-backend": "sh _testBackend.sh"
     },
     "keywords": [
         "Tyepscript",
@@ -51,6 +50,8 @@
         "@types/cors": "^2.8.4",
         "@types/debug": "^0.0.30",
         "@types/dotenv": "^4.0.3",
+        "@types/enzyme": "^3.1.13",
+        "@types/enzyme-adapter-react-16": "^1.0.3",
         "@types/express": "^4.11.1",
         "@types/express-fileupload": "^0.4.0",
         "@types/history": "^4.7.0",
