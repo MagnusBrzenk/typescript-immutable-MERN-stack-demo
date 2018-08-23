@@ -4,10 +4,12 @@
     "description": "Boilerplate for Tyepscript-Mongo-Express-React-Immutable-Node",
     "main": "index.js",
     "scripts": {
-        "start": "sh _devServer & sh _devWebapp",
-        "build": "sh _buildRemote.sh",
         "test-frontend": "sh _testFrontend.sh",
-        "test-backend": "sh _testBackend.sh"
+        "test-backend": "sh _testBackend.sh",
+        "start": "sh _devServer & sh _devWebapp",
+        "buildLocal": "sh _buildLocal.sh",
+        "build": "sh _buildRemote.sh",
+        "heroku-postbuild": "sh _buildRemote.sh"
     },
     "keywords": [
         "Tyepscript",
