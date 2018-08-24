@@ -127,6 +127,10 @@ export class EntryPageComponent extends React.Component<IProps, IState> {
                             <p>This is a demo for Dan Darg's Typescript-immutable-MERN-stack architecture. </p>
 
                             <p>
+                                It's been tested on Apple devices but <b>NOT on ANDROID or PCs!</b>
+                            </p>
+
+                            <p>
                                 The password would have been sent along with the link to this site. If you did not
                                 receive one, then contact darg@jhu.edu
                             </p>
