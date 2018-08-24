@@ -109,6 +109,7 @@ class ContactfeedComponent extends React.Component<IProps, IState> {
                         position: relative;
                         background-color: rgba(0, 0, 0, 0.2);
                         overflow: scroll;
+                        -webkit-overflow-scrolling: touch; /* for iOS momentum scrolling */
                     }
                     .contact-item-wrapper {
                         height: 100%;
