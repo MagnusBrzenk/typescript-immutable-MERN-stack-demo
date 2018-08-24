@@ -19,15 +19,15 @@ export namespace RENAME_ME {
     }
 
     /* Required: default values to initialize instances of this data structure */
-    export const Default: Interface = {
+    export const Default: Readonly<Interface> = {
         id: undefined
     };
 
     /* Optional: array of default objects to initialize the Defaults of parent models */
-    export const Defaults: Interface[] = [Default];
+    export const Defaults: Readonly<Interface[]> = [Default];
 
     /* Optional: demo object to use for development, etc. */
-    export const Demo: Interface = {
+    export const Demo: Readonly<Interface> = {
         id: "ABCD0123456"
     };
 

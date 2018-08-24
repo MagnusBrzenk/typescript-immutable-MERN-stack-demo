@@ -18,7 +18,7 @@ export namespace CONTACT {
         creationDate?: string;
     }
 
-    export const Default: Interface = {
+    export const Default: Readonly<Interface> = {
         _id: undefined,
         firstName: "",
         lastName: "",
@@ -29,9 +29,9 @@ export namespace CONTACT {
         creationDate: new Date().toDateString()
     };
 
-    export const Defaults: Interface[] = [];
+    export const Defaults: Readonly<Interface[]> = [];
 
-    export const Demo: Interface = {
+    export const Demo: Readonly<Interface> = {
         _id: "--DEMO-ID-0--",
         firstName: "Magnus",
         lastName: "Carlsen",
@@ -42,7 +42,7 @@ export namespace CONTACT {
         creationDate: new Date().toDateString()
     };
 
-    export const Demos: Interface[] = [
+    export const Demos: Readonly<Interface[]> = [
         Demo,
         {
             _id: "--DEMO-ID-1--",
@@ -162,27 +162,3 @@ export namespace CONTACT {
     export type ImTypes = getImType<Interface[]>;
     /*--------------------------------------------------------------*/
 }
-
-// /////////////////////////////////////////////////////////////////////
-// /////////////////////////////////////////////////////////////////////
-// /////////////////////////////////////////////////////////////////////
-// /////////////////////////////////////////////////////////////////////
-
-// const aa: any = JSON.stringify({
-//     // _id: "--DEMO-ID-0--",
-//     firstName: "Magnus",
-//     lastName: "Carlsen",
-//     email: "magnus@carlsencom",
-//     imageUrl: "https://pmcvariety.files.wordpress.com/2016/08/still-magnus-no.jpg",
-//     bActive: true,
-//     phoneNumbers: PHONENUMBER.Demos,
-//     creationDate: new Date().toDateString()
-// });
-
-// const a = JSON.parse(aa);
-
-// // a.phoneNumbers[0].countryCode.code = 1;
-
-// const b = CONTACT.validate(a);
-
-// console.log("b >>>>> ", b);

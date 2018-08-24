@@ -9,12 +9,12 @@ export namespace SIMPLEAUTH {
         authorizedApiKey: string | undefined;
     }
 
-    export const Default: Interface = {
+    export const Default: Readonly<Interface> = {
         user: "guest",
         authorizedApiKey: undefined
     };
 
-    export const Demo: Interface = {
+    export const Demo: Readonly<Interface> = {
         user: "guest",
         authorizedApiKey: undefined
     };

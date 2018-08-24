@@ -10,7 +10,7 @@ export namespace ROUTERSTATE {
         action: any;
     }
 
-    export const Default: Interface = {
+    export const Default: Readonly<Interface> = {
         location: null,
         action: null
     };
