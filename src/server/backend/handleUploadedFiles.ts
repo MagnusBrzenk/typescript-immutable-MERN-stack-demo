@@ -4,6 +4,9 @@ import { streamToAWS } from "__BACKEND/streamToAWS";
 import { Readable } from "stream";
 import { NETWORK } from "__MODELS";
 
+import { __debug } from "__FUNCTIONS/__debug";
+const debug = __debug("HANDLE-UPLOADED-FILES");
+
 /**
  * This function handles form postings with image data and conveys them to AWS S3.
  * It extracts image data buffers from req, converts them to streams, uploads them to S3 bucket,
@@ -41,6 +44,9 @@ export async function handleUploadedFiles(req: express.Request): Promise<NETWORK
         });
         //Await all promised urls to be returned to middle-tier/client
         const urlNames: string[] = await Promise.all(promisedUploadedImageUrls);
+        debug("----------");
+        debug(urlNames);
+        debug("----------");
         return { success: !!urlNames.length, imageUrls: urlNames.filter(Boolean) };
     } catch (err) {
         return { success: false, imageUrls: [] };
