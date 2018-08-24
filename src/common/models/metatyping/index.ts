@@ -7,10 +7,9 @@ import { UpdateMethods } from "./UpdateMethods";
 
 /**
  * THIS FILE IS CENTRAL TO THE ARCHITECTURE OF THIS TYPESCRIPT-MERN-IMMUTABLE BOILERPLATE
- * DO NOT EDIT IT UNLESS YOU INTEND TO ADJUST/EXTEND THE ARCHITECTURE ITSELF!!!
  * This File Has Two Main Exports:
- * 1. template class for creating deeply nested immutable records
- * 2. template type to apply to instances of the template class
+ * 1. template function returning generator of deeply nested immutable payload
+ * 2. template type to apply to instances of that generator
  */
 
 //Define types for Immutable Map (M) and List (L) stripped of types for methods that we're going to add back in but customized
@@ -35,9 +34,9 @@ export type M = Omit<Immutable.Map<any, any>, OmitInImmutableListAndMap>;
  * The type input `T` is the POJO interface that provides the nested-key info
  */
 export interface ImMethodsInterface<T> extends DeleteMethods<T>, GetMethods<T>, SetMethods<T>, UpdateMethods<T> {
-    ////////////////////////////////////////////////////////////////////////
+    //
     // MISC METHODS
-    ////////////////////////////////////////////////////////////////////////
+    //
     toJS<T>(): T;
 
     push<V1 extends T extends any[] ? T[number] : T[keyof T]>(val: getImType<V1>): getImType<T>;
@@ -47,7 +46,6 @@ export interface ImMethodsInterface<T> extends DeleteMethods<T>, GetMethods<T>, 
     ): getImType<T>;
 
     map<V1 extends T extends any[] ? T[number] : never>(
-        // cb: (el: V1 extends TPrimitives ? V1 : getImType<V1>, ind?: number) => any
         cb: (el: any, ind?: number, arr?: any) => any
     ): getImType<any[]>;
 
@@ -58,8 +56,6 @@ export interface ImMethodsInterface<T> extends DeleteMethods<T>, GetMethods<T>, 
     groupBy<V1 extends T extends any[] ? T[number] : never>(
         cb: (el: V1 extends TPrimitives ? V1 : getImType<V1>) => any
     ): Immutable.OrderedMap<any, any>;
-
-    // groupBy
 
     concat<T>(val: T extends TPrimitives ? T : getImType<T>): getImType<T>;
 }
@@ -82,36 +78,6 @@ export interface ImMethodsInterface<T> extends DeleteMethods<T>, GetMethods<T>, 
 export function getImmutableGenerator<T>(defaultPOJO: T): (params?: Partial<T>) => getImType<T> {
     return function(params?: Partial<T>): getImType<T> {
         //
-
-        /**
-         * Define methods to be called sooner in the prototype chain than immutable methods
-         * The types here don't matter because these methods will be applied to the immutable
-         * payload we're constructing, whose type shall be constructed separately
-         */
-        const interceptedImmutableMethods: any = {
-            // getIn1(keys: any[]) {
-            //     return (this as any).getIn(keys) as any;
-            // },
-            // getIn2(keys: any[]) {
-            //     return (this as any).getIn(keys) as any;
-            // },
-            // getIn3(keys: any[]) {
-            //     return (this as any).getIn(keys) as any;
-            // },
-            // getIn4(keys: any[]) {
-            //     return (this as any).getIn(keys) as any;
-            // },
-            // getIn5(keys: any[]) {
-            //     return (this as any).getIn(keys) as any;
-            // },
-            // getIn6(keys: any[]) {
-            //     return (this as any).getIn(keys) as any;
-            // },
-            // updateIn3(keys: any[]) {
-            //     return (this as any).updateIn(keys) as any;
-            // }
-        };
-
         const deeplyNestedImmutableMapsAndOrLists = Immutable.fromJS({
             ...(defaultPOJO as any),
             ...(params as any)
@@ -120,8 +86,7 @@ export function getImmutableGenerator<T>(defaultPOJO: T): (params?: Partial<T>) 
         const immutablePayload: getImType<T> = {
             //Have to set the __proto__ property of our immutable payload explicitly because the spread operator won't include it
             __proto__: deeplyNestedImmutableMapsAndOrLists.__proto__,
-            ...deeplyNestedImmutableMapsAndOrLists, //Immutable equivalent of our (in general) deeply-nested-plain-old-JS-objects-and-arrays
-            ...interceptedImmutableMethods
+            ...deeplyNestedImmutableMapsAndOrLists //Immutable equivalent of our (in general) deeply-nested-plain-old-JS-objects-and-arrays
         };
         return (immutablePayload as any) as getImType<T>;
     };
@@ -134,11 +99,11 @@ export function getImmutableGenerator<T>(defaultPOJO: T): (params?: Partial<T>) 
  * because we used fromJS() in the class constructor to convert everything to immutable Maps and Lists.
  */
 type TPrimitives = string | number | boolean | null;
-export type getImType<T> =
-    // T extends TPrimitives // //
-    // ? T
-    // :
-    ImMethodsInterface<T> &
-        //
-        (T extends any[] ? L : M) &
-        Exclude<T, "map" | "concat">; //
+export type getImType<T> = [T] extends [TPrimitives] // //
+    ? T
+    : ImMethodsInterface<T> &
+          //
+          ([T] extends [any[]] ? L : M) &
+          Exclude<T, "map" | "concat" | TCommonKeynames>; //
+
+//   getImType<Exclude<V3, TCommonKeynames>>;

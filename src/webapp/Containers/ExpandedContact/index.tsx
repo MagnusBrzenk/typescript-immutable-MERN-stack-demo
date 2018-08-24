@@ -612,7 +612,8 @@ class ExpandedContactComponent extends React.Component<IProps, IState> {
                             </div>
                             <div className="contact-non-image-data-item-2" style={{ flex: 8, marginLeft: -10 }}>
                                 <TrendyTextField //
-                                    defaultText={this.state.expandedContact.get("contact").get("email") as string}
+                                    // defaultText={this.state.expandedContact.get("contact").get("email")}
+                                    defaultText={this.state.expandedContact.getIn(["contact", "email"]) as string}
                                     labelContent={this.emailJSX}
                                     height={this.state.trendyTextLineHeight}
                                     bEditingLocked={this.state.bEditingLocked}

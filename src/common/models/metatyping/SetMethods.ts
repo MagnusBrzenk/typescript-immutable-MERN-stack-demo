@@ -63,23 +63,6 @@ export interface SetMethods<T> {
         val: getImType<V3>
     ): getImType<T>;
     //4 ARGS
-    // setIn<
-    //     //Values
-    //     V0 extends T,
-    //     V1 extends V0 extends any[] ? V0[number] : V0[keyof V0],
-    //     V2 extends V1 extends any[] ? V1[number] : V1[keyof V1],
-    //     V3 extends V2 extends any[] ? V2[number] : V2[keyof V2],
-    //     V4 extends V3 extends any[] ? V3[number] : V3[keyof V3],
-    //     //Intell Keys
-    //     K1 extends V0 extends any[] ? number : keyof V0,
-    //     K2 extends V1 extends any[] ? number : keyof V1,
-    //     K3 extends V2 extends any[] ? number : keyof V2,
-    //     K4 extends V3 extends any[] ? number : keyof V3
-    // >(
-    //     keys: [K1, K2, K3, K4],
-    //     val: getImType<V4>
-    // ): getImType<T>;
-
     setIn<
         //Values
         V0 extends T,
@@ -98,24 +81,6 @@ export interface SetMethods<T> {
         val: V4 extends TPrimitives ? V4 : getImType<V4>
     ): getImType<T>;
     //5 ARGS
-    // setIn<
-    //     //Values
-    //     V0 extends T,
-    //     V1 extends V0 extends any[] ? V0[number] : V0[keyof V0],
-    //     V2 extends V1 extends any[] ? V1[number] : V1[keyof V1],
-    //     V3 extends V2 extends any[] ? V2[number] : V2[keyof V2],
-    //     V4 extends V3 extends any[] ? V3[number] : V3[keyof V3],
-    //     V5 extends V4 extends any[] ? V4[number] : V4[keyof V4],
-    //     //Intell Keys
-    //     K1 extends V0 extends any[] ? number : keyof V0,
-    //     K2 extends V1 extends any[] ? number : keyof V1,
-    //     K3 extends V2 extends any[] ? number : keyof V2,
-    //     K4 extends V3 extends any[] ? number : keyof V3,
-    //     K5 extends V4 extends any[] ? number : keyof V4
-    // >(
-    //     keys: [K1, K2, K3, K4, K5],
-    //     val: getImType<V5>
-    // ): getImType<T>;
     setIn<
         //Values
         V0 extends T,

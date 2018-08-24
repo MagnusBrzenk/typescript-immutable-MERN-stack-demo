@@ -1,5 +1,6 @@
 #! /bin/bash
 
+### Run all
 ### Make sure you don't have white space after the \ chars
 
 mocha \
