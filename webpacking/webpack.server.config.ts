@@ -35,7 +35,7 @@ const serverWebpackConfig: webpack.Configuration = {
             {
                 test: /\.(js|ts)?$/,
                 use: [
-                    "babel-loader",
+                    // "babel-loader",
                     {
                         loader: "ts-loader",
                         options: {
