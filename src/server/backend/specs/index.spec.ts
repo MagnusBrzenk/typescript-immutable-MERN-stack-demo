@@ -1,4 +1,4 @@
-/// <reference path="../../../types/global.d.ts" />
+/// <reference path="../../../common/types/global.d.ts" />
 
 //Test-specific env vars
 process.env.DISABLE_DEBUG = "true"; //Crude mechanism to switch off debugging messages

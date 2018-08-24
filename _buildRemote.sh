@@ -7,9 +7,6 @@ printf "\n======================================================\n"
 ### Clean everything out
 rm -rf dist
 
-### Not ideal but heroku is acting up for some reason
-# yarn install --production=false
-
 printf "\n======================================================\n"
 printf   "FINISHED YARNING"
 printf "\n======================================================\n"

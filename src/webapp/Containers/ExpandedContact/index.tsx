@@ -864,7 +864,6 @@ function mapStateToProps(state: ROOTSTATE.ImType): IReduxStateToProps {
 interface IReduxCallbacks {
     cbClearExpandedContact: typeof AppActions.clearExpandedContact;
     cbSetExpandedContact: typeof AppActions.setExpandedContact;
-    cbSetContact: typeof AppActions.setContact;
     cbPersistExpandedContact: typeof AppActions.persistExpandedContact;
     cbStopPersistingExpandedContact: typeof AppActions.stopPersistingExpandedContact;
 }
@@ -872,8 +871,6 @@ const mapDispatchToProps = (dispatch: any): IReduxCallbacks => {
     return {
         cbClearExpandedContact: () => dispatch(AppActions.clearExpandedContact()),
         cbSetExpandedContact: (newContactId: CONTACT.ImType) => dispatch(AppActions.setExpandedContact(newContactId)),
-        cbSetContact: (payload: { contactToBeSetId: string; newContact: CONTACT.ImType }) =>
-            dispatch(AppActions.setContact(payload)),
         cbPersistExpandedContact: () => dispatch(AppActions.persistExpandedContact()),
         cbStopPersistingExpandedContact: () => dispatch(AppActions.stopPersistingExpandedContact())
     };
