@@ -177,6 +177,7 @@ class FilterBarComponent extends React.Component<IProps, IState> {
                                     onTextInputChange={this.props.cbWordSearch}
                                     mainBackgroundColor={PREZ.primaryColorDark}
                                     inputTextBackgroundColor={PREZ.primaryColorDark}
+                                    bIsForWordSearch
                                 />
                             </div>
                         </div>

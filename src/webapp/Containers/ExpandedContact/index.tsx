@@ -231,6 +231,7 @@ class ExpandedContactComponent extends React.Component<IProps, IState> {
 
     render() {
         const imageUrl: string | undefined = this.state.expandedContact.get("contact").get("imageUrl");
+        const bSmallScreen: boolean = window.outerWidth < PREZ.lowerScreenSize;
         return (
             <div className="expanded-contact">
                 <style jsx>{`
@@ -528,6 +529,7 @@ class ExpandedContactComponent extends React.Component<IProps, IState> {
                                             () => this.validateContactDataLocally()
                                         )
                                     }
+                                    bSmallScreen={!!bSmallScreen}
                                 />
                             </div>
                             <div className="contact-non-image-data-item-2">

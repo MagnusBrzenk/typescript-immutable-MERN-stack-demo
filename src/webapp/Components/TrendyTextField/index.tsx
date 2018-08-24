@@ -18,7 +18,9 @@ interface IProps {
     onTextInputChange?: (wordForSearching: string) => void;
     style?: React.CSSProperties;
     //
+    bSmallScreen?: boolean;
     bEditingLocked?: boolean;
+    bIsForWordSearch?: boolean;
 }
 interface IState extends IProps {
     //Props to receive default values:
@@ -29,6 +31,8 @@ const defaultBackgroundColor: string = "#7e57c2";
 
 /**
  * Trendy text field with transforming placeholder text
+ * NOTE: the internal logic got a bit messy here unfortunately -- it's ok for this app as is, but if you wanted to expand
+ * upon it or reuse it elsewhere then it needs to be rebuilt from scratch
  */
 export class TrendyTextField extends React.Component<IProps, IState> {
     //
@@ -62,6 +66,7 @@ export class TrendyTextField extends React.Component<IProps, IState> {
                 this.props.inputTextBackgroundColor || this.props.mainBackgroundColor || defaultBackgroundColor,
             mainBackgroundColor: this.props.mainBackgroundColor || defaultBackgroundColor,
             //
+            bSmallScreen: this.props.bSmallScreen,
             bEditingLocked: !!this.props.bEditingLocked,
             defaultText: this.props.defaultText || "",
             labelContent: this.props.labelContent || this.defaultLabelValue,
@@ -217,16 +222,15 @@ export class TrendyTextField extends React.Component<IProps, IState> {
                         font-family: inherit;
                         font-size: ${labelTextDefaultFontSize}px;
                         font-weight: inherit;
-
                         white-space: nowrap;
                         width: auto;
                     }
 
+                    .force-label-transformation,
                     .input-text:focus + .input-label,
                     .input-text:not(:placeholder-shown) + .input-label,
-                    .input-text:focus:not(:placeholder-shown) + .input-label,
-                    .force-label-transformation {
-                        display: "inline";
+                    .input-text:focus:not(:placeholder-shown) + .input-label {
+                        display: inline;
                         visibility: visible;
                         z-index: 1;
                         opacity: 1;
@@ -238,7 +242,7 @@ export class TrendyTextField extends React.Component<IProps, IState> {
                         color: transparent;
                     }
                     @media only screen and (max-width: ${PREZ.lowerScreenSize}px) {
-                        .input-label {
+                        .input-label-word-search {
                             right: 50%;
                             transform: translateX(50%);
                         }
@@ -275,8 +279,11 @@ export class TrendyTextField extends React.Component<IProps, IState> {
                                     <label //
                                         htmlFor={this.trendyTextId}
                                         className={`input-label ${
-                                            this.state.bEditingLocked ? "force-label-transformation" : ""
-                                        }`}
+                                            !this.props.bIsForWordSearch ? "force-label-transformation" : ""
+                                        }
+                                        ${!!this.props.bIsForWordSearch ? "input-label-word-search" : ""}
+
+                                        `}
                                     >
                                         {/* NOTE: only this content can be affected by :placeholder css events */}
                                         {this.state.labelContent}
