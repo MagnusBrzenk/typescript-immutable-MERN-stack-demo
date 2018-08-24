@@ -17,7 +17,7 @@ interface IArgs {
 export async function streamToAWS({
     stream,
     filename = "contact-demo-image-upload-" + uuid(),
-    s3Bucket = process.env.S3_BUCKET_NAME,
+    s3Bucket = process.env.AWS_S3_BUCKET_NAME,
     bVerbose = false
 }: IArgs): Promise<string> {
     /////////////////////////////////////////////////////////

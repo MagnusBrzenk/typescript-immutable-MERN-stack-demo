@@ -21,8 +21,8 @@ export default function loadEnvVars(disableDebug = false) {
         debug("AWS_SECRET_ACCESS_KEY NOT DEFINED!!!");
         // process.exit(0);
     }
-    if (!process.env.S3_BUCKET_NAME) {
-        debug("S3_BUCKET_NAME NOT DEFINED!!!");
+    if (!process.env.AWS_S3_BUCKET_NAME) {
+        debug("AWS_S3_BUCKET_NAME NOT DEFINED!!!");
         // process.exit(0);
     }
     if (!process.env.MONGODB_LOCAL_URI) {
