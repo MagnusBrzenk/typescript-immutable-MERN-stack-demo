@@ -6,7 +6,7 @@ process.env.MONGODB_NAME = "testdb";
 
 //App env vars
 import loadEnvVars from "__FUNCTIONS/loadEnvVars";
-loadEnvVars(!true);
+loadEnvVars();
 
 import * as Mongo from "mongodb";
 let db: Mongo.Db;

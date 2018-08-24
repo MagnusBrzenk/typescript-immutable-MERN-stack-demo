@@ -8,11 +8,7 @@ const debug = __debug("ENV-CHECKER");
 /**
  * Load and confirm existence of backend environment variables
  */
-export default function loadEnvVars(disableDebug = false) {
-    if (!process.env.UPLOAD_PSEUDO_DATA_KEY) {
-        debug("UPLOAD_PSEUDO_DATA_KEY NOT DEFINED!!!");
-        process.exit(0);
-    }
+export default function loadEnvVars() {
     if (!process.env.AWS_ACCESS_KEY_ID) {
         debug("AWS_ACCESS_KEY_ID NOT DEFINED!!!");
         // process.exit(0);

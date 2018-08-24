@@ -33,7 +33,7 @@ export class EntryPageComponent extends React.Component<IProps, IState> {
         this.props.cbAuthenticateSimply(passwordSubmitted);
 
         const apiKey = this.props.simpleAuth.get("authorizedApiKey");
-        if (!apiKey) this.setState({ formMessage: "Password Unsuccesful" });
+        if (!apiKey) this.setState({ formMessage: "Password Unsuccessful" });
     }
 
     render() {

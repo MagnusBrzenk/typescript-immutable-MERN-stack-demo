@@ -52,7 +52,7 @@ In the third terminal, start up the webpack-dev server for the frontend with:
 sh _devWebapp.sh
 ```
 
-If all goes well, the app will function from `http://localhost:3000/`, and both the forntend and backend will auto-reload whenever you make changes to their code.
+If all goes well, the app will function from `http://localhost:3000/`, and both the forntend and backend will auto-reload whenever you make changes to their code. To get past the simple authorization, you need to use one of the passwords you had included in the .env file. The default is `SIMPLE_AUTH_PASSWORDS='[XXX,YYY,ZZZ]'`.
 
 ### Local Production Setup
 
