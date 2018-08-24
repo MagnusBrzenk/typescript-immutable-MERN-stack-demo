@@ -29,9 +29,9 @@ export namespace CONTACT {
         creationDate: new Date().toDateString()
     };
 
-    export const Defaults: Readonly<Interface[]> = [];
+    export const Defaults: Interface[] = [];
 
-    export const Demo: Readonly<Interface> = {
+    export const Demo: Interface = {
         _id: "--DEMO-ID-0--",
         firstName: "Magnus",
         lastName: "Carlsen",
@@ -42,7 +42,7 @@ export namespace CONTACT {
         creationDate: new Date().toDateString()
     };
 
-    export const Demos: Readonly<Interface[]> = [
+    export const Demos: Interface[] = [
         Demo,
         {
             _id: "--DEMO-ID-1--",

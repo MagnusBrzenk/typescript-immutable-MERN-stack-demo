@@ -9,7 +9,7 @@ import { EXPANDEDCONTACT, ROOTSTATE } from "__MODELS";
 import { AppActions } from "__REDUX/actions";
 import PREZ from "__UTILS/frontendPresentation";
 
-interface IParentProps { }
+interface IParentProps {}
 
 interface IState {
     varyingMargin: number;
@@ -20,8 +20,7 @@ interface IState {
 type IProps = IReduxStateToProps & IReduxCallbacks & IParentProps;
 
 export class HomePageComponent extends React.Component<IProps, IState> {
-
-    private headerElementId: string = 'header-wrapper-id';
+    private headerElementId: string = "header-wrapper-id";
 
     constructor(props: IProps) {
         super(props);
@@ -53,8 +52,6 @@ export class HomePageComponent extends React.Component<IProps, IState> {
         this.setState({ varyingMargin, headerHeight });
     }
 
-
-
     render() {
         return (
             <div className="home-page">
@@ -83,7 +80,7 @@ export class HomePageComponent extends React.Component<IProps, IState> {
                 <header className="header-wrapper" id={this.headerElementId}>
                     <FilterBar />
                 </header>
-                <div className="contact-feed-wrapper" >
+                <div className="contact-feed-wrapper">
                     <Contactfeed heightPxls={window.innerHeight - this.state.headerHeight} width={"100%"} />
                 </div>
                 {!!this.props.expandedContact.get("bModalExpanded") && (

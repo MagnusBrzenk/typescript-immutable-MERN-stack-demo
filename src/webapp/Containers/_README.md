@@ -2,7 +2,7 @@
 
 ## Redux/Typescript/Reselect
 
-Getting the redux store to connect to smart components ('containers') via reselect memoizers and proper typings is tricky. Detailed comments have been added to `ContactfeedContainer` to try to make clear what's going on.
+Getting the redux store to connect to smart components ('containers') via reselect memoizers and proper typings is tricky. Detailed comments have been added to `Contactfeed` to try to make clear what's going on.
 
 NOTE: If you're new to redux, stores, etc. then this may not be the best place to get introduced since it's a lot to absorb and, in addition to the basic concepts (which themsevles take time to absorb), we also add a lot of typescript jazz into the mix.
 

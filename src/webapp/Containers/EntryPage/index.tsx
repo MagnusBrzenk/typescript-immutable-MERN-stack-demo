@@ -27,6 +27,9 @@ export class EntryPageComponent extends React.Component<IProps, IState> {
 
     handleSubmit(event: React.FormEvent) {
         event.preventDefault();
+
+        const x = (document.getElementById("password-id") as HTMLInputElement).blur();
+
         const form: HTMLFormElement = event.target as any;
         const data: FormData = new FormData(form);
         const passwordSubmitted: string = data.get("password") as any;
@@ -69,8 +72,8 @@ export class EntryPageComponent extends React.Component<IProps, IState> {
                         background-color: ${PREZ.primaryColor};
                         margin-top: 0px;
                         margin-bottom: 50px;
+                        font-size: 16px;
                     }
-
                     .password-input {
                         flex: 1;
                         box-sizing: border-box;
@@ -79,6 +82,7 @@ export class EntryPageComponent extends React.Component<IProps, IState> {
                         min-height: 30px;
                         margin: 10px;
                         text-align: center;
+                        font-size: 16px;
                     }
                     .password-input::placeholder {
                         color: grey;
@@ -95,6 +99,7 @@ export class EntryPageComponent extends React.Component<IProps, IState> {
                         margin-top: 0px;
                         color: ${PREZ.displayWhite};
                         background-color: ${PREZ.primaryColorDark};
+                        font-size: 16px;
                     }
                     .about-section {
                         text-align: left;
