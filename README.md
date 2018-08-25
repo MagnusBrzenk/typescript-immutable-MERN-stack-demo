@@ -8,8 +8,7 @@ A Typescript-Mongo-Express-React-immutable-Node demo.
     -   Local storage: enable authorized user to remain authorized for ~24 hours
     -   Enable user-specific actions
 -   Search: at the moment word search is only local -- needs to query actual DB
--   Server rate limiting with e.g. express-brute
--   Improve partitioning of webpacking of ts/tsx files for back- and frontends (a compiler error on the backend is not to affect webpakcing of fronted and vice-versa!)
+-   Add loading spinners for waiting sequences
 
 ## Motivation
 
