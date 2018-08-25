@@ -48,6 +48,10 @@ const serverWebpackConfig: webpack.Configuration = {
         ]
     },
 
+    optimization: {
+        minimize: false
+    },
+
     /////////////////////////////////////
     // WEBPACK PLUGINS                 //
     /////////////////////////////////////

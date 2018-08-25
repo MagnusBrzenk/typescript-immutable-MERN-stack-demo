@@ -1,5 +1,5 @@
 import { getMongoDB } from "__BACKEND/getMongoDB";
-import { demoContactfeedData } from "__BACKEND/demoContactfeedData";
+import { getDemoContactfeedData } from "__BACKEND/demoContactfeedData";
 import { CONTACT } from "__MODELS";
 
 /**
@@ -9,7 +9,7 @@ export async function uploadPseudoData(): Promise<void> {
     const db = await getMongoDB();
 
     //Validate format of pseudoData and filter out erroneous ones
-    const validatedPseudoData: CONTACT.Interface[] = CONTACT.validate(demoContactfeedData);
+    const validatedPseudoData: CONTACT.Interface[] = CONTACT.validate(await getDemoContactfeedData());
 
     //Note: projection field within .find() is deprecated -- must use `cursor.project()`
     const existingIds = (await db

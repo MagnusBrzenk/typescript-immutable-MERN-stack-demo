@@ -23,7 +23,6 @@ export async function persistContacts(contacts: CONTACT.Interface[]): Promise<CO
         updateOne: {
             filter: { _id: el._id },
             update: { $set: el },
-            // update: { $set: {} },
             upsert: true
         }
     }));

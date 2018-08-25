@@ -44,9 +44,6 @@ export async function handleUploadedFiles(req: express.Request): Promise<NETWORK
         });
         //Await all promised urls to be returned to middle-tier/client
         const urlNames: string[] = await Promise.all(promisedUploadedImageUrls);
-        debug("----------");
-        debug(urlNames);
-        debug("----------");
         return { success: !!urlNames.length, imageUrls: urlNames.filter(Boolean) };
     } catch (err) {
         return { success: false, imageUrls: [] };
