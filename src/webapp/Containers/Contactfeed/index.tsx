@@ -11,8 +11,11 @@ import {
     selectActiveContactItems,
     selectInactiveContactItems,
     selectDisplayItemsFilter,
-    selectWordForSearching
+    selectWordForSearching,
+    getFetchFeedInProgress
 } from "__REDUX/selectors";
+import { fromEvent, Subscription } from "rxjs"; //Get types and/or observable-creation functions
+import { debounceTime, map } from "rxjs/operators"; //Get piping operators
 import PREZ from "__UTILS/frontendPresentation";
 
 ////////////////////////////////////////////////////////////////////
@@ -33,6 +36,7 @@ interface IState {
     heightPxls: number;
     allContactItems: CONTACT.ImTypes;
     contactItemFontSizePercent: string;
+    bScrollHandlerLocked: boolean;
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -40,6 +44,7 @@ class ContactfeedComponent extends React.Component<IProps, IState> {
     ////////////////////////////////////////////////////////////////
 
     private scrollerDivId: string = "contact-feed-id";
+    private scrollSubscription: Subscription | undefined;
 
     constructor(props: IProps) {
         super(props);
@@ -47,24 +52,40 @@ class ContactfeedComponent extends React.Component<IProps, IState> {
             width: this.props.width ? this.props.width : "100%",
             heightPxls: this.props.heightPxls,
             allContactItems: this.props.allContactItems,
-            contactItemFontSizePercent: PREZ.getDynamicFontSizePrcnt("xlarge") + "%"
+            contactItemFontSizePercent: PREZ.getDynamicFontSizePrcnt("xlarge") + "%",
+            bScrollHandlerLocked: false
         };
-        this.infiniteScrollHandler = this.infiniteScrollHandler.bind(this);
+        // this.infiniteScrollHandler = this.infiniteScrollHandler.bind(this);
         this.handleWindowResize = this.handleWindowResize.bind(this);
     }
 
     componentDidMount() {
-        //Scrolling feed
-        const scrollDiv: HTMLElement | null = document.getElementById(this.scrollerDivId);
-        if (!!scrollDiv) scrollDiv.addEventListener("scroll", this.infiniteScrollHandler);
-        //Trigger action that then triggers epic that fetches contacts for feed
-        this.props.cbFetchMoreContacts();
         //Feed width resizing, etc.
         window.addEventListener("resize", this.handleWindowResize);
+
+        //Fetch the first batch of contacts
+        this.props.cbFetchMoreContacts();
+
+        //Set up infinite scroll:
+        const feedTriggerBuffer: number = 300;
+        const scrollDiv: HTMLElement | null = document.getElementById(this.scrollerDivId);
+        if (!scrollDiv) return;
+        this.scrollSubscription = fromEvent(scrollDiv, "scroll")
+            .pipe(
+                debounceTime(100),
+                map(() => ({
+                    bLoadMore:
+                        scrollDiv!.scrollTop > scrollDiv!.scrollHeight - scrollDiv!.offsetHeight - feedTriggerBuffer
+                }))
+            )
+            .subscribe(({ bLoadMore }) => {
+                if (bLoadMore) this.props.cbFetchMoreContacts();
+            });
     }
 
     componentWillUnmount() {
         window.removeEventListener("resize", this.handleWindowResize);
+        if (!!this.scrollSubscription) this.scrollSubscription.unsubscribe();
     }
 
     componentDidUpdate(prevProps: IProps) {
@@ -80,19 +101,20 @@ class ContactfeedComponent extends React.Component<IProps, IState> {
         this.setState({ contactItemFontSizePercent: PREZ.getDynamicFontSizePrcnt("xlarge") + "%" });
     }
 
-    infiniteScrollHandler() {
-        const scrollDiv: HTMLElement | null = document.getElementById(this.scrollerDivId);
-        if (!scrollDiv) return;
+    // infiniteScrollHandler() {
+    //     const scrollDiv: HTMLElement | null = document.getElementById(this.scrollerDivId);
+    //     if (!scrollDiv) return;
 
-        const triggerBuffer: number = 300;
-        const bLoadMoreContacts =
-            scrollDiv!.scrollTop > scrollDiv!.scrollHeight - scrollDiv!.offsetHeight - triggerBuffer;
+    //     const triggerBuffer: number = 300;
+    //     const bLoadMoreContacts: boolean =
+    //         !this.state.bScrollHandlerLocked &&
+    //         scrollDiv!.scrollTop > scrollDiv!.scrollHeight - scrollDiv!.offsetHeight - triggerBuffer;
 
-        if (!!bLoadMoreContacts) {
-            console.log("Fetching more contacts ...");
-            this.props.cbFetchMoreContacts();
-        }
-    }
+    //     if (!!bLoadMoreContacts) {
+    //         console.log("Fetching more contacts ...");
+    //         this.props.cbFetchMoreContacts();
+    //     }
+    // }
 
     render() {
         const displayFilter: FRONTENDFILTERS.TFilterStrings = this.props.displayItemsFilter;
@@ -149,6 +171,7 @@ interface IReduxStateToProps {
     inactiveContactItems: CONTACT.ImTypes;
     displayItemsFilter: FRONTENDFILTERS.TFilterStrings;
     wordForSearching: string;
+    bFetchFeedInProgress: boolean;
 }
 function mapStateToProps(state: ROOTSTATE.ImType): IReduxStateToProps {
     return {
@@ -156,7 +179,8 @@ function mapStateToProps(state: ROOTSTATE.ImType): IReduxStateToProps {
         activeContactItems: selectActiveContactItems(state),
         inactiveContactItems: selectInactiveContactItems(state),
         displayItemsFilter: selectDisplayItemsFilter(state),
-        wordForSearching: selectWordForSearching(state)
+        wordForSearching: selectWordForSearching(state),
+        bFetchFeedInProgress: getFetchFeedInProgress(state)
     };
 }
 

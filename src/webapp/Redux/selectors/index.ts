@@ -32,6 +32,10 @@ export const getSimpleAuth = (state: ROOTSTATE.ImType): SIMPLEAUTH.ImType => {
     return simpleAuth;
 };
 
+export const getFetchFeedInProgress = (state: ROOTSTATE.ImType): boolean => {
+    return state.get("contactFeed").get("bFetchFeedInProgress");
+};
+
 /////////////////////////////////////////////////////////
 // MEMOIZED SELECTORS
 /////////////////////////////////////////////////////////

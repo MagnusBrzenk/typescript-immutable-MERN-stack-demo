@@ -8,6 +8,7 @@ const debug = __debug("EPIC-DEP");
 export const epicDependencies = {
     fetchFeedChunk: async (feedchunk: number, authorizedApiKey: string): Promise<CONTACT.Interface[]> => {
         try {
+            console.log("Fetching feed chunk: ", feedchunk);
             return await fetch(`/api/fetchmorecontacts?feedchunk=${feedchunk}`, {
                 headers: { Authorization: authorizedApiKey }
             }).then(async res => {

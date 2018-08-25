@@ -22,6 +22,9 @@ export const contactFeedReducer: Reducer<CONTACTFEED.ImType, AnyAction> = functi
     switch (action.type) {
         //////////////////
 
+        case AppActions.Types.FETCH_MORE_CONTACTS:
+            return substate0.set("bFetchFeedInProgress", true);
+
         case AppActions.Types.FETCH_MORE_CONTACTS_FULFILLED:
             //Cast action as corresponding type
             const matchedAction1: ReturnType<typeof AppActions.fetchMoreContactsFulfilled> = action as any;
@@ -29,7 +32,6 @@ export const contactFeedReducer: Reducer<CONTACTFEED.ImType, AnyAction> = functi
             if (!matchedAction1.payload! || matchedAction1.payload!.length === 0) {
                 return substate0;
             }
-
             //Combine contacts fetched from DB; unfortunately, can't at present cast array directly to immutable payload; .genIm() method only accepts POJOs
             const newContacts = CONTACTFEED.genIm({
                 contactItems: matchedAction1.payload!
@@ -47,7 +49,10 @@ export const contactFeedReducer: Reducer<CONTACTFEED.ImType, AnyAction> = functi
                         .toList() as any
             );
             //Finally, increment feedchunks counter
+            console.log(">>>>", newSubstate1b.get("feedchunks"));
             const newSubstate1c = newSubstate1b.update("feedchunks", el => (el as number) + 1);
+            console.log(">>>>", newSubstate1c.get("feedchunks"));
+            console.log("NEW LENGTH:", newSubstate1c.get("contactItems").size);
             return newSubstate1c;
 
         case AppActions.Types.SET_CONTACT:

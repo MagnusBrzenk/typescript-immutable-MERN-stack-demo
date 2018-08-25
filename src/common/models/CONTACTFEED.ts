@@ -5,16 +5,19 @@ export namespace CONTACTFEED {
     export interface Interface {
         contactItems: CONTACT.Interface[];
         feedchunks: number;
+        bFetchFeedInProgress: boolean;
     }
 
     export const Default: Interface = {
         contactItems: CONTACT.Defaults,
-        feedchunks: 0
+        feedchunks: 0,
+        bFetchFeedInProgress: false
     };
 
     export const Demo: Interface = {
         contactItems: CONTACT.Demos,
-        feedchunks: 0
+        feedchunks: 0,
+        bFetchFeedInProgress: false
     };
 
     /* DO NOT EDIT/REMOVE */
