@@ -61,7 +61,9 @@ This will generate bundles for the front- and backends in a newly generated `dis
 
 ### Deployment
 
-Heroku is an easy and free/inexpensive platform on which to deploy a full-stack MERN application. Included here is a `Procfile` and script command `heroku-postbuild` that enables easy deployment via `git push heroku master` (after you've installed the heroku cli, etc.). The only other thing you need to do is copy/paste over your environment vars to heroku via its dashboard or by using the heroku cli tool.
+Heroku is an easy and free/inexpensive platform on which to deploy a full-stack MERN application. Included here is a `Procfile` and script command `heroku-postbuild` that enables easy deployment via `git push heroku master` (after you've installed the heroku cli, etc.). You'll then need to copy/paste over your environment vars to heroku via its dashboard (or by using the heroku cli tool).
+
+Finally, you'll need a mongodb service to connect your backend to. Most mongodb services will provide a free-light sandbox to connect to. Mongo atlas is straight forward to learn/use. Once you have a cluster set up and have obtained a uri, copy it over to your 'MONGODB_REMOTE_URI' env var in heroku, and hopefully your full-stack MERN app will be fully functional.
 
 ### VSCode
 
