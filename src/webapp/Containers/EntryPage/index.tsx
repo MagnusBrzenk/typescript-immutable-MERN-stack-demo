@@ -168,12 +168,6 @@ export class EntryPageComponent extends React.Component<IProps, IState> {
                                 CSS, Less and Sass/Scss are enabled globally, through local css-modules, and via my
                                 overall preferred approach using styled-jsx (CSS only).
                             </p>
-                            {/* <p>
-                                Note: there are lots of ways this site could be improved, but since it's main purpose
-                                was to develop/demonstrate boilerplate-design patterns in the world of
-                                typescript-react-redux-immutable, I've decided not to obsess over it (any more than is
-                                seen here).
-                            </p> */}
                             <div className="terms-of-use">
                                 <h3>TERMS OF USE</h3>
                                 <h4>As of August 23st 2018</h4>

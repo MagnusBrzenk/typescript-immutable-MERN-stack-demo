@@ -231,7 +231,7 @@ class ExpandedContactComponent extends React.Component<IProps, IState> {
 
     render() {
         const imageUrl: string | undefined = this.state.expandedContact.get("contact").get("imageUrl");
-        const bSmallScreen: boolean = window.outerWidth < PREZ.lowerScreenSize;
+        const bSmallScreen: boolean = window.innerWidth < PREZ.lowerScreenSize;
         return (
             <div className="expanded-contact">
                 <style jsx>{`
@@ -584,7 +584,11 @@ class ExpandedContactComponent extends React.Component<IProps, IState> {
                         <div className="contact-non-image-data-row">
                             <div
                                 className="contact-non-image-data-item-1"
-                                onClick={() => {
+                                style={{
+                                    userSelect: "none"
+                                }}
+                                onClick={e => {
+                                    e.preventDefault();
                                     //Control active-user toggling
                                     if (!!this.state.bEditingLocked) return;
                                     this.setState(oldState => {

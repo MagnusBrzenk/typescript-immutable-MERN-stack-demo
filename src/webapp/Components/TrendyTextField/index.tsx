@@ -32,7 +32,7 @@ const defaultBackgroundColor: string = "#7e57c2";
 /**
  * Trendy text field with transforming placeholder text
  * NOTE: the internal logic got a bit messy here unfortunately -- it's ok for this app as is, but if you wanted to expand
- * upon it or reuse it elsewhere then it needs to be rebuilt from scratch
+ * upon it or reuse it elsewhere then it needs to be rebuilt from scratch (with more robust parameterization of transforms in particular) :(
  */
 export class TrendyTextField extends React.Component<IProps, IState> {
     //
@@ -119,24 +119,10 @@ export class TrendyTextField extends React.Component<IProps, IState> {
             textInputVertPaddingPxls}px`;
         //Change element visibility, colors, etc. so you can see what's going on
         const bDebug = !true;
+        const bSmallScreen = window.innerWidth < PREZ.lowerScreenSize;
 
-        // console.log("^^^^^^^^^^^^^^^^^^^^^^");
-        // console.log("^^^^^^^^^^^^^^^^^^^^^^");
-        // console.log(
-        //     "this.state.defaultText",
-        //     this.state.defaultText,
-        //     ["True", "False"].includes(this.state.defaultText)
-        // );
-        // console.log("this.state.defaultText", this.state.defaultText);
-        // console.log("^^^^^^^^^^^^^^^^^^^^^^");
-        // console.log("labelDefaultPosYPrcnt", labelDefaultPosYPrcnt);
-        // console.log("labelTransformedPosY", labelTransformedPosY);
-        //
         return (
-            <div //
-                className={"trendy-text-field"}
-                // style={{ display: "inline" }}
-            >
+            <div className={"trendy-text-field"}>
                 <style jsx>{`
                     /* MISC SETUP */
                     *,
@@ -279,7 +265,9 @@ export class TrendyTextField extends React.Component<IProps, IState> {
                                     <label //
                                         htmlFor={this.trendyTextId}
                                         className={`input-label ${
-                                            !this.props.bIsForWordSearch ? "force-label-transformation" : ""
+                                            !this.props.bIsForWordSearch && !!bSmallScreen
+                                                ? "force-label-transformation"
+                                                : ""
                                         }
                                         ${!!this.props.bIsForWordSearch ? "input-label-word-search" : ""}
 
