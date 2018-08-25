@@ -1,5 +1,5 @@
+import { getDemoContactfeedData } from "__BACKEND/getDemoContactfeedData";
 import { getMongoDB } from "__BACKEND/getMongoDB";
-import { getDemoContactfeedData } from "__BACKEND/demoContactfeedData";
 import { CONTACT } from "__MODELS";
 
 /**
