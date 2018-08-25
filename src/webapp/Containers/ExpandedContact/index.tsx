@@ -584,9 +584,7 @@ class ExpandedContactComponent extends React.Component<IProps, IState> {
                         <div className="contact-non-image-data-row">
                             <div
                                 className="contact-non-image-data-item-1"
-                                style={{
-                                    userSelect: "none"
-                                }}
+                                style={{ position: "relative" }}
                                 onClick={e => {
                                     e.preventDefault();
                                     //Control active-user toggling
@@ -612,6 +610,16 @@ class ExpandedContactComponent extends React.Component<IProps, IState> {
                                     mainBackgroundColor={PREZ.primaryColor}
                                     fontSizePxls={this.textFiledFontSizePxls}
                                     bottomBorderColor={!!this.state.bEditingLocked ? "transparent" : PREZ.displayWhite}
+                                />
+                                <div
+                                    className="cover-trendy-text-field-to-make-it-unselectable"
+                                    style={{
+                                        position: "absolute",
+                                        top: 0,
+                                        bottom: 0,
+                                        right: 0,
+                                        left: 0
+                                    }}
                                 />
                             </div>
                             <div className="contact-non-image-data-item-2" style={{ flex: 8, marginLeft: -10 }}>
