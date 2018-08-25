@@ -17,17 +17,15 @@ interface IState {
     bActiveBoxChecked: boolean;
     selectedPhoneNumberIndex: number;
     fontSizePercent: string;
-    contactData: CONTACT.ImType;
 }
 
-export class ContactItem extends React.PureComponent<IProps, IState> {
+export class ContactItem extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
             bActiveBoxChecked: true,
             selectedPhoneNumberIndex: 0,
-            fontSizePercent: "110%",
-            contactData: this.props.contactData
+            fontSizePercent: "110%"
         };
         this.adjustPhoneNumberIndex = this.adjustPhoneNumberIndex.bind(this);
         this.setState = this.setState.bind(this);
@@ -115,7 +113,7 @@ export class ContactItem extends React.PureComponent<IProps, IState> {
                     className="contact-info-column"
                     onClick={() => {
                         //Set contact in this row as expanded contact and open dialog
-                        this.props.cbSetExpandedContact(this.state.contactData);
+                        this.props.cbSetExpandedContact(this.props.contactData);
                         this.props.cbShowExpandedContact({ bOpen: true });
                     }}
                 >

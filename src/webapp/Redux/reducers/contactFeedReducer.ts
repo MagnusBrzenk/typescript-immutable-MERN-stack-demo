@@ -72,7 +72,6 @@ export const contactFeedReducer: Reducer<CONTACTFEED.ImType, AnyAction> = functi
         case AppActions.Types.DELETE_CONTACT:
             //Cast action as corresponding type
             const matchedAction3: ReturnType<typeof AppActions.deleteContact> = action as any;
-            console.log("!!!!!", JSON.stringify(matchedAction3));
             checkPayload(matchedAction3);
             //Build new substate
             const newSubstate3: CONTACTFEED.ImType = substate0.deleteIn([
@@ -102,11 +101,16 @@ export const contactFeedReducer: Reducer<CONTACTFEED.ImType, AnyAction> = functi
             const indexOfAlphabeticPosition: number = substate0
                 .get("contactItems")
                 .findIndex(el => el.get("lastName").toLowerCase() > persistedPojoContact.lastName.toLowerCase());
+
+            // If no position found, place at end of feed:
+            if (indexOfAlphabeticPosition === -1)
+                return newSubstate4.update("contactItems", (el: CONTACT.ImTypes) => el.push(persistedImmutableContact));
+            // Else, insert in appropriate space
             return newSubstate4.update(
                 "contactItems",
                 el =>
                     ((el as CONTACT.ImTypes).insert(
-                        indexOfAlphabeticPosition + 0,
+                        indexOfAlphabeticPosition - 1,
                         persistedImmutableContact
                     ) as any) as CONTACT.ImTypes
             );
