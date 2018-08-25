@@ -28,7 +28,7 @@ interface IParentProps {
     heightPxls: number;
 }
 
-//Never change IProps for containers; it will always determined by the intersection of these 3 interfaces:
+//Never change IProps for containers; it will always be determined by the intersection of these 3 interfaces:
 type IProps = IReduxStateToProps & IReduxCallbacks & IParentProps;
 
 interface IState {
@@ -55,7 +55,6 @@ class ContactfeedComponent extends React.Component<IProps, IState> {
             contactItemFontSizePercent: PREZ.getDynamicFontSizePrcnt("xlarge") + "%",
             bScrollHandlerLocked: false
         };
-        // this.infiniteScrollHandler = this.infiniteScrollHandler.bind(this);
         this.handleWindowResize = this.handleWindowResize.bind(this);
     }
 
@@ -67,7 +66,7 @@ class ContactfeedComponent extends React.Component<IProps, IState> {
         this.props.cbFetchMoreContacts();
 
         //Set up infinite scroll:
-        const feedTriggerBuffer: number = 300;
+        const feedTriggerBufferPxls: number = 300;
         const scrollDiv: HTMLElement | null = document.getElementById(this.scrollerDivId);
         if (!scrollDiv) return;
         this.scrollSubscription = fromEvent(scrollDiv, "scroll")
@@ -75,7 +74,8 @@ class ContactfeedComponent extends React.Component<IProps, IState> {
                 debounceTime(100),
                 map(() => ({
                     bLoadMore:
-                        scrollDiv!.scrollTop > scrollDiv!.scrollHeight - scrollDiv!.offsetHeight - feedTriggerBuffer
+                        scrollDiv!.scrollTop > //
+                        scrollDiv!.scrollHeight - scrollDiv!.offsetHeight - feedTriggerBufferPxls
                 }))
             )
             .subscribe(({ bLoadMore }) => {
@@ -100,21 +100,6 @@ class ContactfeedComponent extends React.Component<IProps, IState> {
     handleWindowResize() {
         this.setState({ contactItemFontSizePercent: PREZ.getDynamicFontSizePrcnt("xlarge") + "%" });
     }
-
-    // infiniteScrollHandler() {
-    //     const scrollDiv: HTMLElement | null = document.getElementById(this.scrollerDivId);
-    //     if (!scrollDiv) return;
-
-    //     const triggerBuffer: number = 300;
-    //     const bLoadMoreContacts: boolean =
-    //         !this.state.bScrollHandlerLocked &&
-    //         scrollDiv!.scrollTop > scrollDiv!.scrollHeight - scrollDiv!.offsetHeight - triggerBuffer;
-
-    //     if (!!bLoadMoreContacts) {
-    //         console.log("Fetching more contacts ...");
-    //         this.props.cbFetchMoreContacts();
-    //     }
-    // }
 
     render() {
         const displayFilter: FRONTENDFILTERS.TFilterStrings = this.props.displayItemsFilter;

@@ -49,10 +49,8 @@ export const contactFeedReducer: Reducer<CONTACTFEED.ImType, AnyAction> = functi
                         .toList() as any
             );
             //Finally, increment feedchunks counter
-            console.log(">>>>", newSubstate1b.get("feedchunks"));
             const newSubstate1c = newSubstate1b.update("feedchunks", el => (el as number) + 1);
-            console.log(">>>>", newSubstate1c.get("feedchunks"));
-            console.log("NEW LENGTH:", newSubstate1c.get("contactItems").size);
+            console.log("NEW FEED LENGTH:", newSubstate1c.get("contactItems").size);
             return newSubstate1c;
 
         case AppActions.Types.SET_CONTACT:
