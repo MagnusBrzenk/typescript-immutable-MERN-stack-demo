@@ -103,9 +103,9 @@ This codebase is arranged in four parts: `configuration`, `source code`, `resour
 +-- [other-config-files-and-READMEs]
 ```
 
-The most important configuration details are found in `package.json` (of course), `tsconfig.json`, `.babelrc`, and the webpack config files in `./webpacking`. If you're new to any of these then, sorry, they're tedious to learn but necessary, so I've tried to be more verbose and comprehensive than most in putting these together.
+The most important configuration details are found in `package.json`, `tsconfig.json`, `.babelrc`, and the webpack config files in `./webpacking`. If you're new to any of these then, sorry, they're tedious to learn but necessary, so I've tried to be more verbose and comprehensive than most in putting these together.
 
-The key thing to know is that webpack is running the bundling show but delegating transpilation to ts-loader and babel (who are in turn following instructions in `.babelrc` and `tsconfig.json` respectively).
+The key thing to know is that webpack is running the 'bundling show' but delegating transpilation to ts-loader and babel (who are in turn following instructions in `tsconfig.json` and `.babelrc` respectively).
 
 #### Resources
 
@@ -180,7 +180,7 @@ const validatedUsers: USER.Interface[] = USER.validate(expectedUser);
 
 //Send the validated user to the frontend:
 const responseObject: NETWORK.IUser = {
-    message: "User succesfully extracted from query",
+    message: "User successfully extracted from query",
     success: true,
     payload: validatedUser
 };
@@ -204,12 +204,12 @@ response => AppActions.fetchUserFulfilled(response))
         case AppActions.Types.FETCH_USER_FULFILLED:
             //Cast action as corresponding type for this action
             const matchedAction: ReturnType<typeof AppActions.fetchUserFulfilled> = action as any;
-            const validatedUser: USER.Interface = matchedAction;
+            const validatedUser: USER.Interface = matchedAction.payload;
             const immutableUser: USER.ImType = USER.ImGen(validatedUser);
             const newReduxSubstate: USERFEED.ImType = previousReduxSubstate.setIn(['allUsers',validatedUser._id],immutableUser);
             return newReduxSubstate;
 
-    //Make all your (immutable) users extractable from your redux state and available to react containers via a selector function (notice the plural convention USER.ImTypes signifying that it mirrors the *array* of POJOs USER.Interface[])
+//Make all your (immutable) users extractable from your redux state and available to react containers via a selector function (notice the plural convention USER.ImTypes signifying that it mirrors the *array* of POJOs USER.Interface[])
     const getAllUsers = (state: ROOTSTATE.ImType): USER.ImTypes => {
     return state.getIn(['feed','allUsers']);
 };
@@ -230,7 +230,7 @@ function mapStateToProps(state: ROOTSTATE.ImType): IReduxStateToProps {
 //Etc.
 ```
 
-Notice how many places in your codebase you are (re)-using the same basic structures, types, validators, etc. -- that's why it's been made easy to grab all of those resources associated with a structure by calling on a got namespace.
+Notice how many places in your codebase you are (re)-using the same basic structures, types, validators, etc. -- that's why it's been made easy to grab all of those resources associated with a structure by calling on an easily accesible namespace.
 
 ###### src/server
 
@@ -254,7 +254,7 @@ This has all the code for a fairly straightforward express-mongo backend. The fu
 
 ###### webapp
 
-The `src/webapp` dir contains a fiarly straightforward react-redux-epicMiddleware setup. I personally like to have a separate dir for each component and container since this lets you also easily associate all sorts of local resources with your specific components such as css-module files, READMEs, testing files, and auxiliary functions and subcomponents that are nice to break out but unlikely to be used in any other component (and thus don't require/deserve their own dir).
+The `src/webapp` dir contains a fairly straightforward react-redux-epicMiddleware setup. I personally like to have a separate dir for each component and container since this lets you also easily associate all sorts of local resources with your specific components such as css-module files, READMEs, testing files, and auxiliary functions and subcomponents that are nice to break out but unlikely to be used in any other component (and thus don't require/deserve their own dir).
 
 ```
 .
@@ -286,7 +286,7 @@ Everything to do with redux is grouped into `webapp/Redux`, and I've found it pa
 
 ### Testing
 
-Since this app is a boilerplate demo, not many testing specifics have been implemnted. However, the basic infrastructure for forntend and backend tests using mocha, enzyme and chai is in place and accesible through the commands `yarn test-frontend` and `yarn test-backend`.
+Since this app is a boilerplate demo, not many testing specifics have been implemnted. However, the basic infrastructure for frontend and backend tests using mocha, enzyme and chai is in place and accesible through the commands `yarn test-frontend` and `yarn test-backend`.
 
 ### Tech Details
 
@@ -299,3 +299,7 @@ This repo uses webpack to bundle both the front and backend into low-level JS (w
 #### CSS/LESS/SCSS
 
 If you want global styles applied to your bundle, add them to `src/webapp/AppEntry/global.*`. If you want local modules for CSS/LESS/SCSS modules, then look at the examples in `src/webapp/Components/Templates`. If you want `styled-jsx` then you can see examples of its application in `Templates` and throughout this app.
+
+### Acknowledgements
+
+While researching ideas/patterns for this architecture, I looked through about a dozen react-redux boilerplates (mostly todo apps) out there, so thanks as ever to everyone in the react-redux community -- I hope there are some patterns/ideas in here that will be helpful to others. Of those that I encountered, the most helpful was [this repo](https://github.com/rokoroku/react-redux-typescript-boilerplate/blob/master/package.json), so special thanks go to [rokoroku](https://github.com/rokoroku) and this repo's contributors.
