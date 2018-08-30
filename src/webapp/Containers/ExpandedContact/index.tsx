@@ -656,7 +656,7 @@ class ExpandedContactComponent extends React.Component<IProps, IState> {
                         {this.state.expandedContact
                             .get("contact")
                             .get("phoneNumbers")
-                            .map((el, ind: number) => (
+                            .map((el, ind) => (
                                 <div className="contact-non-image-data-row" key={ind}>
                                     <div className="contact-non-image-data-item-1">
                                         <TrendyTextField //
@@ -671,7 +671,7 @@ class ExpandedContactComponent extends React.Component<IProps, IState> {
                                             bottomBorderColor={
                                                 !!this.state.bEditingLocked
                                                     ? "transparent"
-                                                    : !!this.state.bValidPhoneNumbers[ind]
+                                                    : !!this.state.bValidPhoneNumbers[ind!]
                                                         ? PREZ.displayWhite
                                                         : PREZ.secondaryColor
                                             }
@@ -679,7 +679,7 @@ class ExpandedContactComponent extends React.Component<IProps, IState> {
                                                 this.setState(
                                                     oldState => ({
                                                         expandedContact: oldState.expandedContact.setIn(
-                                                            ["contact", "phoneNumbers", ind, "countryCode", "code"],
+                                                            ["contact", "phoneNumbers", ind!, "countryCode", "code"],
                                                             newText
                                                         )
                                                     }),
@@ -704,7 +704,7 @@ class ExpandedContactComponent extends React.Component<IProps, IState> {
                                             bottomBorderColor={
                                                 !!this.state.bEditingLocked
                                                     ? "transparent"
-                                                    : !!this.state.bValidPhoneNumbers[ind]
+                                                    : !!this.state.bValidPhoneNumbers[ind!]
                                                         ? PREZ.displayWhite
                                                         : PREZ.secondaryColor
                                             }
@@ -712,7 +712,7 @@ class ExpandedContactComponent extends React.Component<IProps, IState> {
                                                 this.setState(
                                                     oldState => ({
                                                         expandedContact: oldState.expandedContact.setIn(
-                                                            ["contact", "phoneNumbers", ind, "dialNumber"],
+                                                            ["contact", "phoneNumbers", ind!, "dialNumber"],
                                                             newText
                                                         )
                                                     }),
@@ -727,7 +727,7 @@ class ExpandedContactComponent extends React.Component<IProps, IState> {
                                         onClick={() =>
                                             this.setState(oldState => ({
                                                 expandedContact: oldState.expandedContact.updateIn(
-                                                    ["contact", "phoneNumbers", ind, "phoneType"],
+                                                    ["contact", "phoneNumbers", ind!, "phoneType"],
                                                     el2 => (el2 === "mobile" ? "home" : "mobile")
                                                 )
                                             }))
@@ -751,7 +751,7 @@ class ExpandedContactComponent extends React.Component<IProps, IState> {
                                                 expandedContact: oldState.expandedContact.deleteIn([
                                                     "contact",
                                                     "phoneNumbers",
-                                                    ind
+                                                    ind!
                                                 ]),
                                                 bValidPhoneNumbers: this.state.bValidPhoneNumbers.filter(
                                                     (el2, ind2) => ind2 !== ind

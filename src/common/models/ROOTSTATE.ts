@@ -18,7 +18,7 @@ export namespace ROOTSTATE {
         router: ROUTERSTATE.Interface;
     }
 
-    export const Default: Interface = {
+    export const Default: Readonly<Interface> = {
         contactFeed: CONTACTFEED.Default,
         frontendFilters: FRONTENDFILTERS.Default,
         expandedContact: EXPANDEDCONTACT.Default,

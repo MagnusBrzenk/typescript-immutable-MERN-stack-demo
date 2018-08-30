@@ -37,27 +37,28 @@ export interface ImMethodsInterface<T> extends DeleteMethods<T>, GetMethods<T>, 
     //
     // MISC METHODS
     //
-    toJS<T>(): T;
+    toJS(): T;
 
     push<V1 extends T extends any[] ? T[number] : T[keyof T]>(val: getImType<V1>): getImType<T>;
 
     filter<V1 extends T extends any[] ? T[number] : never>(
-        cb: (el: V1 extends TPrimitives ? V1 : getImType<V1>, ind?: number) => boolean
+        cb: (el: [V1] extends [TPrimitives] ? V1 : getImType<V1>, ind?: number) => boolean
     ): getImType<T>;
 
+    // map<V1 extends T extends any[] ? T[number] : never>(cb: (el: any, ind?: number, arr?: any) => any): any;
     map<V1 extends T extends any[] ? T[number] : never>(
-        cb: (el: any, ind?: number, arr?: any) => any
-    ): getImType<any[]>;
+        cb: (el: [V1] extends [TPrimitives] ? V1 : getImType<V1>, ind?: number, arr?: any) => any
+    ): any;
 
     findIndex<V1 extends T extends any[] ? T[number] : never>(
-        cb: (el: V1 extends TPrimitives ? V1 : getImType<V1>) => boolean
+        cb: (el: [V1] extends [TPrimitives] ? V1 : getImType<V1>) => boolean
     ): number;
 
     groupBy<V1 extends T extends any[] ? T[number] : never>(
-        cb: (el: V1 extends TPrimitives ? V1 : getImType<V1>) => any
+        cb: (el: [V1] extends [TPrimitives] ? V1 : getImType<V1>) => any
     ): Immutable.OrderedMap<any, any>;
 
-    concat<T>(val: T extends TPrimitives ? T : getImType<T>): getImType<T>;
+    concat<T>(val: [T] extends [TPrimitives] ? T : getImType<T>): getImType<T>;
 }
 
 /**
@@ -104,6 +105,4 @@ export type getImType<T> = [T] extends [TPrimitives] // //
     : ImMethodsInterface<T> &
           //
           ([T] extends [any[]] ? L : M) &
-          Exclude<T, "map" | "concat" | TCommonKeynames>; //
-
-//   getImType<Exclude<V3, TCommonKeynames>>;
+          Exclude<T, "map" | "concat" | TCommonKeynames>;
