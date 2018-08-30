@@ -5,20 +5,18 @@ import { __debug } from "__FUNCTIONS/__debug";
 const debug = __debug("CONTACT");
 
 export namespace CONTACT {
-    //
-
     export interface Interface {
-        _id?: string;
-        firstName: string;
-        lastName: string;
-        email: string;
-        imageUrl?: string;
-        bActive: boolean;
-        phoneNumbers: PHONENUMBER.Interface[];
-        creationDate?: string;
+        readonly _id?: string;
+        readonly firstName: string;
+        readonly lastName: string;
+        readonly email: string;
+        readonly imageUrl?: string;
+        readonly bActive: boolean;
+        readonly phoneNumbers: PHONENUMBER.Interface[];
+        readonly creationDate?: string;
     }
 
-    export const Default: Readonly<Interface> = {
+    export const Default: Interface = {
         _id: undefined,
         firstName: "",
         lastName: "",

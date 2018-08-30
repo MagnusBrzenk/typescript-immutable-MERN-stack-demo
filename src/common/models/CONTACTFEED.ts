@@ -3,9 +3,9 @@ import { CONTACT } from "./";
 
 export namespace CONTACTFEED {
     export interface Interface {
-        contactItems: CONTACT.Interface[];
-        feedchunks: number;
-        bFetchFeedInProgress: boolean;
+        readonly contactItems: CONTACT.Interface[];
+        readonly feedchunks: number;
+        readonly bFetchFeedInProgress: boolean;
     }
 
     export const Default: Interface = {

@@ -15,19 +15,19 @@ export namespace RENAME_ME {
 
     /* Required: Define type properties of this POJO */
     export interface Interface {
-        id: string | undefined;
+        readonly id: string | undefined;
     }
 
     /* Required: default values to initialize instances of this data structure */
-    export const Default: Readonly<Interface> = {
+    export const Default: Interface = {
         id: undefined
     };
 
     /* Optional: array of default objects to initialize the Defaults of parent models */
-    export const Defaults: Readonly<Interface[]> = [Default];
+    export const Defaults: Interface[] = [Default];
 
     /* Optional: demo object to use for development, etc. */
-    export const Demo: Readonly<Interface> = {
+    export const Demo: Interface = {
         id: "ABCD0123456"
     };
 

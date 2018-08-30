@@ -11,14 +11,14 @@ import { ROUTERSTATE } from "./ROUTERSTATE";
  */
 export namespace ROOTSTATE {
     export interface Interface {
-        contactFeed: CONTACTFEED.Interface;
-        frontendFilters: FRONTENDFILTERS.Interface;
-        expandedContact: EXPANDEDCONTACT.Interface;
-        simpleAuth: SIMPLEAUTH.Interface;
-        router: ROUTERSTATE.Interface;
+        readonly contactFeed: CONTACTFEED.Interface;
+        readonly frontendFilters: FRONTENDFILTERS.Interface;
+        readonly expandedContact: EXPANDEDCONTACT.Interface;
+        readonly simpleAuth: SIMPLEAUTH.Interface;
+        readonly router: ROUTERSTATE.Interface;
     }
 
-    export const Default: Readonly<Interface> = {
+    export const Default: Interface = {
         contactFeed: CONTACTFEED.Default,
         frontendFilters: FRONTENDFILTERS.Default,
         expandedContact: EXPANDEDCONTACT.Default,

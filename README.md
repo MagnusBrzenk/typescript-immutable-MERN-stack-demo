@@ -8,7 +8,9 @@ A Typescript-Mongo-Express-React-immutable-Node demo.
     -   Local storage: enable authorized user to remain authorized for ~24 hours
     -   Enable user-specific actions
 -   Search: at the moment word search is only local -- needs to query actual DB
+-   Rate limiting with e.g. express-brute
 -   Add loading spinners for waiting sequences
+-   Fork into simpler version stripped of immutables
 
 ## Motivation
 
@@ -18,7 +20,7 @@ A Typescript-Mongo-Express-React-immutable-Node demo.
 -   The best (potential) thing about MERN/MEAN is their ability to share js structures between both frontend and backend. Not all MEAN/MERN setups take full advantage of this. There are lots of frontend todo apps out there, but not enough full-stack demos that have as their goal the efficient sharing and exchange of common data structures between the front and backend. Here are some specific goals of this setup:
     -   To make it so that when you jump between back- and frontends, you can continue to think in terms of the same data structures.
     -   To be able to readily convert between plain-old javascript objects (POJOs; used for network transfer, backend processing, and mongo storage) and deeply-nested immutable 'mirror' representations of those same POJOs (used in the frontend for redux-state storage and smart-component generation).
--   Experiment to see how well we can get immutable to cooperate with typescript.
+-   Experiment to see how well we can get immutable to cooperate with typescript. (Conclusion: immutable isn't worth the added complexity or disruption to typescript, especially if you're not intending an open-source project.)
 
 ## Getting Started
 

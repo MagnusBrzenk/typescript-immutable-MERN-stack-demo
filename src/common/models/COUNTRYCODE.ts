@@ -15,8 +15,8 @@ export namespace COUNTRYCODE {
     const demoCountryName3 = "Canada";
 
     export interface Interface {
-        code: string;
-        name: CName;
+        readonly code: string;
+        readonly name: CName;
     }
 
     export const Default: Interface = {

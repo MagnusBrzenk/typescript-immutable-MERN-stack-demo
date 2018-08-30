@@ -7,8 +7,8 @@ export namespace FRONTENDFILTERS {
     export type TFilterStrings = "all" | "active" | "inactive";
 
     export interface Interface {
-        displayItemsFilter: TFilterStrings;
-        wordForSearching: string;
+        readonly displayItemsFilter: TFilterStrings;
+        readonly wordForSearching: string;
     }
 
     export const Default: Interface = {

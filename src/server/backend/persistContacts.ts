@@ -13,10 +13,10 @@ export async function persistContacts(contacts: CONTACT.Interface[]): Promise<CO
     //
 
     //Validate contacts; if _id is provisional then create a new _id string:
-    const validatedContacts: CONTACT.Interface[] = CONTACT.validate(contacts).map(el => {
-        if (el._id === provisionalNewContactId) el._id = new ObjectId().toHexString();
-        return el;
-    });
+    const validatedContacts: CONTACT.Interface[] = CONTACT.validate(contacts).map(contact => ({
+        ...contact,
+        _id: contact._id === provisionalNewContactId ? new ObjectId().toHexString() : contact._id
+    }));
 
     //Create array of bulk writes:
     const bulkWrites: any = validatedContacts.map(el => ({

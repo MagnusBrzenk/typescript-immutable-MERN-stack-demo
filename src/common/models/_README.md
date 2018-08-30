@@ -36,8 +36,8 @@ state = {
 ```
 
 -   when you store (parts of) your state in a document DB like Mongo, when you transmit it across a network as a JSON, and when you move it around the backend and parts of the client app, you want to interact with your data as POJOs and JS arrays (not as immutables)
--   when you store your state as part of a frontend redux state connected to your smart components, the received wisdom is that you interact with your data as immutable structures
--   to have the best of all worlds, you therefore need to be able to smartly convert from POJOs to immutable structures and vice-versa; accomplishing this while (i) provisioning your POJOs and immutables with type safety AND (ii) not violating the DRY principle is a very difficult intersection of desiderata to obtain, and this architecture is designed to get as close as possible to those goals
+-   when you store your state as part of a frontend redux state connected to your smart components, an influential school of thought is that it's best to interact with your data as immutable structures
+-   to have the best of all worlds, you therefore need to be able to smartly convert from POJOs to immutable structures and vice-versa; accomplishing this while (i) provisioning your POJOs and immutables with type safety AND (ii) not violating the DRY principle is difficult; this architecture aims to get as close as possible to those goals
 
 ## Architecture
 
@@ -47,7 +47,7 @@ When designing a full-stack webapp based on this architecture, follow these roug
 2. Break down each layer of the POJO into objects, arrays and JS primitives so that each sub-POJO can be contained in its own file within this `models` directory.
    2.1. For example, the contact model above has an array of phone-number objects, which can be modelled within a file called `PHONENUMBER.ts`
 3. Within each such model file, we create a `namespace` of the same name. Within this namespace, we shall contain _everything_ to do with that model: typing/default-values/demo-values/immutable-conversion/validation, etc.
-4. Wherever you are in the code base, whenever you want to build/reference some section of your state tree, whether it be the POJO or the corresponding 'immutable payload', you simply import the section of the state tree you want from the corresponding namespace found in this directory (and accessed with the alias '**MODELS' as in `import { CONTACT } from '**MODELS'`) and, using dot notation, summon the type/object/function that you want.
+4. Wherever you are in the code base, whenever you want to build/reference some section of your state tree, whether it be the POJO or the corresponding 'immutable payload', you simply import the section of the state tree you want from the corresponding namespace found in this directory (and accessed with the alias '\_\_MODELS' as in `import { CONTACT } from '__MODELS'`) and, using dot notation, summon the type/object/function that you want.
     1. For example, if you want to access the interface for the phone-number POJO, you import the `PHONENUMBER namespace` and then reference `PHONENUMBER.Interface`
 5. This architecture uses consistent labelling of data structures as found in `TEMPLATE.ts`. Whenever you want to add a new data structure to your state tree, you need to create a NAMESPACE with the following inner constituents:
 
@@ -63,8 +63,8 @@ When designing a full-stack webapp based on this architecture, follow these roug
 
 ## Metatyping
 
--   Much thought has gone into ensuring minimal work/repetition is required whenever you want to adjust your redux state tree, and to make type safety and intellisense as clear/robust as Typescript allows. This is achieved by placing the bulk of the common boilerplate in the dir `metatyping`.
--   The file `metatyping/index.ts` defines the generator function for converting the Default POJO to an immutable payload with types. Each model that you build needs to import the function `metatyping/index/getImmutableGenerator` and call it like so within the namespace
+-   Thought has gone into ensuring minimal work/repetition is required whenever you want to adjust your redux state tree, and to make type safety and intellisense as clear/robust as Typescript allows. This is achieved by placing the bulk of the common boilerplate in the dir `metatyping`.
+-   The file `metatyping/index.ts` defines the generator function for converting the Default POJO to an immutable payload with types. Each model that you build needs to import the function `metatyping/index/getImmutableGenerator` and call it within the namespace as shown in the snippet below
 -   If the POJO representing some substate (e.g. a phone number) is itself composed of other substate POJOs, then they need to be imported and added to the substate POJO in question. This will make types clearer when traversing derived immutable payloads (see below);
 -   Sometimes a customized type is useful but not worth breaking out into its own model; in such a case, place the customized type in the appropriate namespace, as with `TPhoneType` in the following example:
 
@@ -116,7 +116,6 @@ export namespace PHONENUMBER {
         }
     }
 
-
     /* DO NOT EDIT/REMOVE */
     export const genIm = getImmutableGenerator(Default);
     export type ImType = getImType<Interface>;
@@ -153,7 +152,7 @@ The approach to types taken in this architecture takes us a long way to type saf
 
 This has two annoying consequences.
 
-Firstly, typescript will not complain if you 'mix different paths' together. (TOD): give an example of what that means). Fortunately, it's quite rare that you would do that, and it doesnt disrupt the main thing that typescript helps you with: catching typos and easy refactoring.
+Firstly, typescript will not complain if you 'mix different paths' together. (TODO: give an example of what that means.) Fortunately, it's quite rare that you would do that, and it doesnt disrupt the main thing that typescript helps you with (catching typos and easy refactoring).
 
 Secondly, it makes your intellisense hard to work with, since, if you have a types issue, typescript will want to report to you ALL of the possible key combinations that can't be assigned to (typically) the simple type you want. Some effort has been made to alleviate this problem in the metatyping by using the 'Exclude<>' operator, but this doesnt always work and, sometimes might even make it worse :(
 
@@ -163,4 +162,4 @@ Secondly, it makes your intellisense hard to work with, since, if you have a typ
 
 -   If in the future the typescript architects can improve the 'types-widening' problem, then immutable types could work really well; until then, immutable doesn't seem worth it (i.e. see this architecture as an excersize).
 
--   If you're worried about performance, then it's not obvious that immutable makes your app perform better (all else being equal); if you're worried about accidental state-mutation and debugging difficulties that result, well, yeah, that's going to add complexity to your overall development experience, but then immutable adds plenty of complexity. My overall feeling is that you're better off securing super-strong typings with POJOs to avert bugs than deal with the complexity of immutable. If you're worried about accidental mutations, then Readonly<> is your friend. If you're working with pure JS then, yes, immutable probably makes your life easier, but I'll take typescript over immutable any day of the week.
+-   If you're worried about performance, then it's not obvious that immutable makes your app perform better (all else being equal); if you're worried about accidental state-mutation and debugging difficulties that result, well, yeah, that's going to add complexity to your overall development experience, but then immutable adds plenty of complexity itself. My overall feeling is that you're better off securing super-strong typings with POJOs to avert bugs than deal with the complexity of immutable. If you're worried about accidental mutations, then the 'readonly' keyword is your friend when defining types.

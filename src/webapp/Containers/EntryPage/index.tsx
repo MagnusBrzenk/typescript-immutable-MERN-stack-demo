@@ -27,21 +27,16 @@ export class EntryPageComponent extends React.Component<IProps, IState> {
 
     handleSubmit(event: React.FormEvent) {
         event.preventDefault();
-
-        const x = (document.getElementById("password-id") as HTMLInputElement).blur();
-
+        //Extract text from form and submit it as password to API
         const form: HTMLFormElement = event.target as any;
         const data: FormData = new FormData(form);
         const passwordSubmitted: string = data.get("password") as any;
         this.props.cbAuthenticateSimply(passwordSubmitted);
-
-        const apiKey = this.props.simpleAuth.get("authorizedApiKey");
-        // if (!apiKey) setTimeout(() => this.setState({ formMessage: "Password Unsuccessful" }), 1500);
-
-        if (!apiKey)
-            this.setState({ formMessage: "Checking Password ..." }, () =>
-                setTimeout(() => this.setState({ formMessage: "Password Incorrect" }), 5000)
-            );
+        //Set checking message; presume password failure after failureTime;
+        const failureTime = 5000;
+        this.setState({ formMessage: "Checking Password ..." }, () =>
+            setTimeout(() => this.setState({ formMessage: "Password Incorrect" }), failureTime)
+        );
     }
 
     render() {

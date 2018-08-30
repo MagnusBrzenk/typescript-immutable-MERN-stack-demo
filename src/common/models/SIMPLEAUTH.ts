@@ -5,16 +5,16 @@ export namespace SIMPLEAUTH {
     //
 
     export interface Interface {
-        user: string;
-        authorizedApiKey: string | undefined;
+        readonly user: string;
+        readonly authorizedApiKey: string | undefined;
     }
 
-    export const Default: Readonly<Interface> = {
+    export const Default: Interface = {
         user: "guest",
         authorizedApiKey: undefined
     };
 
-    export const Demo: Readonly<Interface> = {
+    export const Demo: Interface = {
         user: "guest",
         authorizedApiKey: undefined
     };

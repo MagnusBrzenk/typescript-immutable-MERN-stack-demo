@@ -10,9 +10,9 @@ export namespace PHONENUMBER {
     export type TPhoneType = "mobile" | "home";
 
     export interface Interface {
-        countryCode: COUNTRYCODE.Interface;
-        dialNumber: string;
-        phoneType: TPhoneType;
+        readonly countryCode: COUNTRYCODE.Interface;
+        readonly dialNumber: string;
+        readonly phoneType: TPhoneType;
     }
 
     export const Default: Interface = {

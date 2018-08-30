@@ -7,9 +7,9 @@ export namespace EXPANDEDCONTACT {
     //////////////////////////////
 
     export interface Interface {
-        contact: CONTACT.Interface;
-        bModalExpanded: boolean;
-        bOpenInEditMode: boolean;
+        readonly contact: CONTACT.Interface;
+        readonly bModalExpanded: boolean;
+        readonly bOpenInEditMode: boolean;
     }
 
     export const Default: Interface = {
