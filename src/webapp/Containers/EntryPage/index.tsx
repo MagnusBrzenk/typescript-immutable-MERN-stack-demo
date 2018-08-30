@@ -36,7 +36,12 @@ export class EntryPageComponent extends React.Component<IProps, IState> {
         this.props.cbAuthenticateSimply(passwordSubmitted);
 
         const apiKey = this.props.simpleAuth.get("authorizedApiKey");
-        if (!apiKey) this.setState({ formMessage: "Password Unsuccessful" });
+        // if (!apiKey) setTimeout(() => this.setState({ formMessage: "Password Unsuccessful" }), 1500);
+
+        if (!apiKey)
+            this.setState({ formMessage: "Checking Password ..." }, () =>
+                setTimeout(() => this.setState({ formMessage: "Password Incorrect" }), 5000)
+            );
     }
 
     render() {
@@ -202,11 +207,7 @@ export class EntryPageComponent extends React.Component<IProps, IState> {
                                 placeholder="Password"
                             />
 
-                            <button //
-                                className="password-button"
-                            >
-                                SUBMIT
-                            </button>
+                            <button className="password-button">SUBMIT</button>
                         </form>
                     </div>
                 ) : (
