@@ -24,7 +24,7 @@ interface IState {
  * The hideModal() callback is triggered here when either (i) the ESC key is pressed, or (ii) a mouse
  * click happens anywhere on the screen, which leads to this important note:
  *
- * IMPORTANT NOTE!!!: because the modal is set up to trigger on a mouse click ANYWHERE, you MUST supply a `event.stopPropogation()`
+ * IMPORTANT NOTE!!!: because the modal is set up to trigger on a mouse click ANYWHERE, you MUST supply a `event.stopPropagation()`
  * instance on whatever container element within the GenCom best represents the interactive area (or you'll just end up closing the GenCom every time).
  */
 export class ModalComponent extends React.Component<IProps, IState> {
